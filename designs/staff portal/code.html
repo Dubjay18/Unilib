@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Academic Portal - Staff Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Literata:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#ffdad7",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e7e1dc",
+                        "surface-bright": "#fff8f3",
+                        "outline": "#8a716f",
+                        "on-surface-variant": "#574240",
+                        "on-secondary-fixed": "#00164e",
+                        "on-error-container": "#93000a",
+                        "surface": "#fff8f3",
+                        "on-primary-fixed-variant": "#842322",
+                        "on-secondary-container": "#1d3989",
+                        "secondary-fixed-dim": "#b6c4ff",
+                        "on-background": "#1d1b18",
+                        "primary": "#5b0309",
+                        "primary-container": "#7a1c1c",
+                        "background": "#fff8f3",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#ede7e2",
+                        "secondary-container": "#8fa7fe",
+                        "surface-container": "#f3ede7",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#32302d",
+                        "tertiary-fixed-dim": "#79db8d",
+                        "outline-variant": "#ddc0bd",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#005323",
+                        "inverse-on-surface": "#f6f0ea",
+                        "inverse-primary": "#ffb3ad",
+                        "secondary": "#4059aa",
+                        "on-surface": "#1d1b18",
+                        "on-primary-fixed": "#410004",
+                        "tertiary-fixed": "#95f8a7",
+                        "secondary-fixed": "#dce1ff",
+                        "on-primary-container": "#ff8981",
+                        "on-secondary-fixed-variant": "#264191",
+                        "on-tertiary-container": "#5dbe73",
+                        "surface-container-low": "#f9f2ed",
+                        "tertiary-container": "#004a1e",
+                        "surface-container-highest": "#e7e1dc",
+                        "surface-tint": "#a43b37",
+                        "tertiary": "#003112",
+                        "on-tertiary-fixed": "#00210a",
+                        "primary-fixed-dim": "#ffb3ad",
+                        "surface-dim": "#dfd9d4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "gutter": "16px",
+                        "stack-lg": "32px",
+                        "stack-sm": "8px",
+                        "section-padding-v": "110px",
+                        "container-margin": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-caps": ["Plus Jakarta Sans"],
+                        "h1-mobile": ["Literata"],
+                        "h1": ["Literata"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "h3": ["Literata"],
+                        "meta": ["Plus Jakarta Sans"],
+                        "h2": ["Literata"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["1.05rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-caps": ["0.75rem", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "h1-mobile": ["2.5rem", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "h1": ["3.5rem", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["0.95rem", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h3": ["2rem", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "meta": ["0.85rem", { "lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "h2": ["2.6rem", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .lift-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .lift-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px -5px rgba(91, 3, 9, 0.1), 0 8px 10px -6px rgba(91, 3, 9, 0.05);
+        }
+        .accent-bar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            border-top-left-radius: 0.5rem;
+            border-bottom-left-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col bg-surface-container dark:bg-surface-container-lowest fixed left-0 top-0 h-full w-64 py-stack-md border-r border-outline-variant z-50">
+<div class="px-gutter mb-stack-lg">
+<div class="flex items-center gap-4 mb-4">
+<img alt="User profile picture" class="w-12 h-12 rounded-full object-cover border-2 border-primary" data-alt="A small, professional headshot of a university librarian wearing glasses and a formal tweed jacket. Warm lighting, classical portrait style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzF6xtcKDUpQK_EP7mx5A9h8PnRVNAdDmqPrgNFJycb5xJ__lXzUpHhMdJBDefVZEZnjEH8LuDwHTe1KDbNRPLMmtANtEqAOAgQWQ-grZXQaNdRgGp_Hc3ENICDWSiz0MpcQRRsL7BD0L7S4kwAo7cJR7tatVUOyRf2Y8Cz0-8kyL4x9XfxQsDJmmL6fNM_TokEnnIj6Wenf3KZrHBlHJmnLJTzTRMLyd4tU6u3X7wU49xRXMFzkoGkArtE9oLY41JXY-GBxWVFmk"/>
+<div>
+<h2 class="font-h3 text-h3 text-primary dark:text-primary-fixed leading-tight">Academic Portal</h2>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Staff Access</span>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary font-body-md text-body-md py-2 px-4 rounded-lg hover:bg-primary-container transition-colors shadow-[0_2px_4px_rgba(122,28,28,0.05)]">New Entry</button>
+</div>
+<ul class="flex-1 space-y-2">
+<li>
+<a class="flex items-center gap-3 py-3 px-4 bg-primary-container dark:bg-primary-container text-on-primary-container font-bold rounded-lg mx-2 transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant rounded-lg mx-2 transition-transform duration-200 hover:translate-x-1 hover:bg-primary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-body-md text-body-md">Library Catalogue</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant rounded-lg mx-2 transition-transform duration-200 hover:translate-x-1 hover:bg-primary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined">swap_horiz</span>
+<span class="font-body-md text-body-md">Circulation</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant rounded-lg mx-2 transition-transform duration-200 hover:translate-x-1 hover:bg-primary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-body-md text-body-md">Analytics</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant rounded-lg mx-2 transition-transform duration-200 hover:translate-x-1 hover:bg-primary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">System Settings</span>
+</a>
+</li>
+</ul>
+<div class="px-2 mt-auto">
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md text-body-md">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 p-gutter md:p-container-margin max-w-[1200px] mx-auto w-full">
+<!-- Header -->
+<header class="mb-stack-lg flex justify-between items-end border-b border-outline-variant pb-4">
+<div>
+<h1 class="font-h1 text-h1-mobile md:text-h1 text-on-background mb-2">Staff Operations</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Manage requests, loans, and inventory across the system.</p>
+</div>
+<div class="hidden sm:flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-surface border border-outline-variant rounded-lg hover:bg-surface-variant transition-colors shadow-[0_2px_4px_rgba(122,28,28,0.05)]">
+<span class="material-symbols-outlined">filter_list</span>
+<span class="font-label-caps text-label-caps">Filter</span>
+</button>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="bg-surface border border-outline-variant rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-body-md w-64 shadow-[0_2px_4px_rgba(122,28,28,0.05)] placeholder-outline-variant text-on-background" placeholder="Search records..." type="text"/>
+</div>
+</div>
+</header>
+<!-- Low Stock Alerts (Bento Grid Style) -->
+<section class="mb-section-padding-v">
+<h2 class="font-h3 text-h3 text-on-background mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-error">warning</span>
+                Low Stock Alerts
+            </h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Alert Card 1 -->
+<div class="lift-card relative bg-surface border border-outline-variant rounded-lg p-6 pl-8 shadow-[0_2px_4px_rgba(122,28,28,0.05)]">
+<div class="accent-bar bg-error"></div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-h3 text-body-lg font-bold">The History of Rome</h3>
+<p class="font-meta text-meta text-on-surface-variant">Theodor Mommsen</p>
+</div>
+<span class="bg-[#fce8e6] text-error px-2 py-1 rounded-sm font-label-caps text-label-caps">1 LEFT</span>
+</div>
+<div class="flex gap-2">
+<button class="text-primary font-label-caps text-label-caps hover:underline">ORDER REPLACEMENT</button>
+</div>
+</div>
+<!-- Alert Card 2 -->
+<div class="lift-card relative bg-surface border border-outline-variant rounded-lg p-6 pl-8 shadow-[0_2px_4px_rgba(122,28,28,0.05)]">
+<div class="accent-bar bg-error"></div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-h3 text-body-lg font-bold">Principles of Physics</h3>
+<p class="font-meta text-meta text-on-surface-variant">Halliday &amp; Resnick</p>
+</div>
+<span class="bg-[#fce8e6] text-error px-2 py-1 rounded-sm font-label-caps text-label-caps">0 LEFT</span>
+</div>
+<div class="flex gap-2">
+<button class="text-primary font-label-caps text-label-caps hover:underline">RUSH ORDER</button>
+</div>
+</div>
+<!-- Alert Card 3 -->
+<div class="lift-card relative bg-surface border border-outline-variant rounded-lg p-6 pl-8 shadow-[0_2px_4px_rgba(122,28,28,0.05)]">
+<div class="accent-bar bg-error"></div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-h3 text-body-lg font-bold">Calculus: Early Transcendentals</h3>
+<p class="font-meta text-meta text-on-surface-variant">James Stewart</p>
+</div>
+<span class="bg-[#fce8e6] text-error px-2 py-1 rounded-sm font-label-caps text-label-caps">2 LEFT</span>
+</div>
+<div class="flex gap-2">
+<button class="text-primary font-label-caps text-label-caps hover:underline">REVIEW STOCK</button>
+</div>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-stack-lg mb-section-padding-v">
+<!-- Requests Queue -->
+<section class="bg-surface rounded-lg border border-outline-variant shadow-[0_2px_4px_rgba(122,28,28,0.05)] overflow-hidden">
+<div class="p-6 border-b border-outline-variant bg-surface-container-low flex justify-between items-center">
+<h2 class="font-h3 text-h3 text-on-background">Requests Queue</h2>
+<span class="font-meta text-meta text-on-surface-variant">4 Pending</span>
+</div>
+<ul class="divide-y divide-outline-variant">
+<li class="p-4 hover:bg-surface-bright transition-colors flex justify-between items-center">
+<div class="flex gap-4 items-center">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold">AJ</div>
+<div>
+<p class="font-body-md font-bold text-on-background">Interlibrary Loan Request</p>
+<p class="font-meta text-meta text-on-surface-variant">Requested by: Prof. A. Jones • 'Fluid Mechanics'</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded-full bg-[#e2f0d9] text-tertiary-container hover:bg-tertiary-fixed transition-colors" title="Approve">
+<span class="material-symbols-outlined text-sm">check</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-full bg-[#fce8e6] text-error hover:bg-error-container transition-colors" title="Reject">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+</li>
+<li class="p-4 hover:bg-surface-bright transition-colors flex justify-between items-center">
+<div class="flex gap-4 items-center">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold">SM</div>
+<div>
+<p class="font-body-md font-bold text-on-background">Hold Request</p>
+<p class="font-meta text-meta text-on-surface-variant">Requested by: Student S. Miller • 'The Republic'</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded-full bg-[#e2f0d9] text-tertiary-container hover:bg-tertiary-fixed transition-colors" title="Approve">
+<span class="material-symbols-outlined text-sm">check</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-full bg-[#fce8e6] text-error hover:bg-error-container transition-colors" title="Reject">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+</li>
+</ul>
+<div class="p-4 border-t border-outline-variant text-center">
+<button class="text-primary font-label-caps text-label-caps hover:underline">VIEW ALL REQUESTS</button>
+</div>
+</section>
+<!-- Active Loans -->
+<section class="bg-surface rounded-lg border border-outline-variant shadow-[0_2px_4px_rgba(122,28,28,0.05)] overflow-hidden">
+<div class="p-6 border-b border-outline-variant bg-surface-container-low flex justify-between items-center">
+<h2 class="font-h3 text-h3 text-on-background">Active Loans Overview</h2>
+<span class="material-symbols-outlined text-primary">book</span>
+</div>
+<div class="p-6">
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-on-background">Standard Loans</span>
+<div class="flex-1 mx-4 h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 65%"></div>
+</div>
+<span class="font-meta text-meta font-bold">1,432</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-body-md text-on-background">Short Term Reserve</span>
+<div class="flex-1 mx-4 h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary" style="width: 30%"></div>
+</div>
+<span class="font-meta text-meta font-bold">245</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-body-md text-error">Overdue</span>
+<div class="flex-1 mx-4 h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-error" style="width: 15%"></div>
+</div>
+<span class="font-meta text-meta font-bold text-error">87</span>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-outline-variant bg-surface-bright">
+<button class="w-full flex items-center justify-center gap-2 text-primary font-label-caps text-label-caps hover:underline">
+<span class="material-symbols-outlined text-sm">manage_search</span>
+                         MANAGE LOANS
+                     </button>
+</div>
+</section>
+</div>
+</main>
+</body></html>

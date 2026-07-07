@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Loans &amp; Fines - UniLibrary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400..900&amp;family=Plus+Jakarta+Sans:wght@400..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#ffdad7",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e7e1dc",
+                        "surface-bright": "#fff8f3",
+                        "outline": "#8a716f",
+                        "on-surface-variant": "#574240",
+                        "on-secondary-fixed": "#00164e",
+                        "on-error-container": "#93000a",
+                        "surface": "#fff8f3",
+                        "on-primary-fixed-variant": "#842322",
+                        "on-secondary-container": "#1d3989",
+                        "secondary-fixed-dim": "#b6c4ff",
+                        "on-background": "#1d1b18",
+                        "primary": "#5b0309",
+                        "primary-container": "#7a1c1c",
+                        "background": "#fff8f3",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#ede7e2",
+                        "secondary-container": "#8fa7fe",
+                        "surface-container": "#f3ede7",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#32302d",
+                        "tertiary-fixed-dim": "#79db8d",
+                        "outline-variant": "#ddc0bd",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#005323",
+                        "inverse-on-surface": "#f6f0ea",
+                        "inverse-primary": "#ffb3ad",
+                        "secondary": "#4059aa",
+                        "on-surface": "#1d1b18",
+                        "on-primary-fixed": "#410004",
+                        "tertiary-fixed": "#95f8a7",
+                        "secondary-fixed": "#dce1ff",
+                        "on-primary-container": "#ff8981",
+                        "on-secondary-fixed-variant": "#264191",
+                        "on-tertiary-container": "#5dbe73",
+                        "surface-container-low": "#f9f2ed",
+                        "tertiary-container": "#004a1e",
+                        "surface-container-highest": "#e7e1dc",
+                        "surface-tint": "#a43b37",
+                        "tertiary": "#003112",
+                        "on-tertiary-fixed": "#00210a",
+                        "primary-fixed-dim": "#ffb3ad",
+                        "surface-dim": "#dfd9d4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "gutter": "16px",
+                        "stack-lg": "32px",
+                        "stack-sm": "8px",
+                        "section-padding-v": "110px",
+                        "container-margin": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-caps": ["Plus Jakarta Sans"],
+                        "h1-mobile": ["Literata"],
+                        "h1": ["Literata"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "h3": ["Literata"],
+                        "meta": ["Plus Jakarta Sans"],
+                        "h2": ["Literata"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["1.05rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-caps": ["0.75rem", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "h1-mobile": ["2.5rem", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "h1": ["3.5rem", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["0.95rem", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h3": ["2rem", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "meta": ["0.85rem", { "lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "h2": ["2.6rem", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #fdfbf7; color: #1d1b18; }
+        .academic-lift:hover { transform: translateY(-6px); box-shadow: 0 10px 25px -5px rgba(122, 28, 28, 0.1), 0 8px 10px -6px rgba(122, 28, 28, 0.1); }
+        .accent-bar-red { border-left: 6px solid #ba1a1a; }
+        .accent-bar-amber { border-left: 6px solid #d97706; }
+        .accent-bar-green { border-left: 6px solid #005323; }
+        .card-surface { background-color: #ffffff; border: 1px solid #e6dec9; }
+        .recessed-input { background-color: #fdfbf7; border: 1px solid #e6dec9; }
+        .bento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .fine-slip-pattern { background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(138, 113, 111, 0.05) 10px, rgba(138, 113, 111, 0.05) 20px); }
+    </style>
+</head>
+<body class="font-body-md antialiased min-h-screen flex flex-col">
+<!-- Top Navigation (Web) -->
+<nav class="hidden md:flex bg-surface text-primary font-label-caps text-label-caps docked full-width top-0 border-b border-outline-variant flat no shadows flex justify-between items-center w-full px-container-margin py-4 max-w-7xl mx-auto z-50">
+<div class="flex items-center gap-6">
+<div class="font-h2 text-h2 text-primary">UniLibrary</div>
+<div class="flex items-center gap-4 ml-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-low transition-all px-3 py-2 rounded" href="#">Catalogue</a>
+<a class="text-primary border-b-2 border-primary font-bold pb-1 px-3 py-2 rounded hover:bg-surface-container-low transition-all" href="#">My Books</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-low transition-all px-3 py-2 rounded" href="#">Research</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-low transition-all px-3 py-2 rounded" href="#">Support</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative recessed-input rounded-full px-4 py-2 flex items-center w-64">
+<span class="material-symbols-outlined text-outline mr-2 text-sm">search</span>
+<input class="bg-transparent border-none outline-none w-full text-body-md placeholder-outline text-on-surface" placeholder="Search library..." type="text"/>
+</div>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden ml-2">
+<img alt="User avatar with role badge" class="object-cover w-full h-full" data-alt="A small, professional portrait photo of a university student or faculty member used as a circular avatar in a web interface. The lighting is bright and clear, set against a neutral, warm white background that matches the scholarly parchment theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUfAURtgiMNTCLcMH3YhZZP4m75mp2jqZhRY-VAyZnYuATE4UZ6DEFrWtoueIL5ZMIM7SjW-gkDr25F5gbel9vscYPmA-xvPh_mkQX88MjPrjojQJ1SLVZXJi9i5ZyIJlISddF2izyZAxqHUgSgp-rbID7Sa0yHtFUNitS-XpUIfwlva3_HsDrtJFu17G4MKfkcUD7YTfj2pMOayPyGJyVnJtiSPUn3rgAewz-MdwAvM4eSPHjIJZbBFKgHniPnprE4XbB7zir8oQ"/>
+</div>
+</div>
+</nav>
+<!-- Side Navigation (Mobile Stacked, Hidden on Web) -->
+<nav class="md:hidden bg-surface-container h-full w-full border-b border-outline-variant py-stack-md px-container-margin z-40 fixed top-0 overflow-y-auto">
+<div class="flex justify-between items-center mb-8">
+<div class="font-h3 text-h3 text-primary">UniLibrary</div>
+<button class="material-symbols-outlined text-on-surface" onclick="this.parentElement.parentElement.classList.toggle('hidden')">close</button>
+</div>
+<div class="flex flex-col gap-2 font-body-md text-body-md">
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg p-3 flex items-center gap-3" href="#"><span class="material-symbols-outlined" data-icon="dashboard">dashboard</span> Dashboard</a>
+<a class="bg-primary-container text-on-primary-container font-bold rounded-lg p-3 flex items-center gap-3" href="#"><span class="material-symbols-outlined" data-icon="menu_book">menu_book</span> Library Catalogue</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg p-3 flex items-center gap-3" href="#"><span class="material-symbols-outlined" data-icon="swap_horiz">swap_horiz</span> Circulation</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg p-3 flex items-center gap-3" href="#"><span class="material-symbols-outlined" data-icon="analytics">analytics</span> Analytics</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg p-3 flex items-center gap-3" href="#"><span class="material-symbols-outlined" data-icon="settings">settings</span> System Settings</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 w-full max-w-7xl mx-auto px-gutter md:px-container-margin py-section-padding-v pt-8 md:pt-16">
+<header class="mb-12">
+<h1 class="font-h1-mobile md:font-h1 text-h1-mobile md:text-h1 text-primary mb-2">My Loans &amp; Fines</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Manage your current physical materials, track due dates, and settle outstanding balances.</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: Active Loans -->
+<div class="lg:col-span-2 space-y-8">
+<section>
+<div class="flex justify-between items-end mb-6 border-b border-outline-variant pb-2">
+<h2 class="font-h3 text-h3 text-on-surface">Active Loans</h2>
+<span class="font-meta text-meta text-on-surface-variant">3 Items Checked Out</span>
+</div>
+<div class="bento-grid">
+<!-- Loan Card 1 (Due Soon) -->
+<article class="card-surface rounded-lg p-5 accent-bar-amber academic-lift transition-all duration-300 relative overflow-hidden group">
+<div class="absolute top-4 right-4 bg-[#fef3c7] text-[#92400e] font-label-caps text-label-caps px-2 py-1 rounded flex items-center gap-1 z-10 border border-[#fde68a]">
+<span class="material-symbols-outlined text-[14px]">warning</span> Due Soon
+                            </div>
+<div class="flex gap-4">
+<div class="w-16 h-24 bg-surface-variant rounded shrink-0 overflow-hidden border border-outline-variant">
+<img alt="Book cover" class="w-full h-full object-cover" data-alt="A clean, minimalist book cover design for 'The Structure of Scientific Revolutions'. The cover features abstract geometric shapes in muted academic colors like navy and crimson on an off-white background, typical of university press publications." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpneiPmk0R7UtfwpWQIumvcAXX7mxu6RppyBMVR6pUQKigTbFvPhRwhWKu4-rS7l5exa_MW1YS-AB8H_e8F0DzF4CJAKYas0hpRqhHSb_cQfPcoN8kUjqfC9ChsppGYAZunlU5RG-Az2CTxQTreRWh9oTcwsKm4CW7hwcZavh8FBKH7eW2mHVJPT2c-A-u8WY3V9w1Iqk-4QAAOmiFwvwl4-Ju6LoN_crMEbeP8uk8L0LDV1cN9jV9KAiZjUi2dykBB6aCP2DyWUg"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-body-lg text-body-lg font-bold text-on-surface leading-tight mb-1">The Structure of Scientific Revolutions</h3>
+<p class="font-meta text-meta text-on-surface-variant">Thomas S. Kuhn</p>
+</div>
+<div class="mt-4">
+<p class="font-meta text-meta text-outline mb-1">Due Date</p>
+<p class="font-body-md text-body-md font-semibold text-on-surface flex items-center gap-1"><span class="material-symbols-outlined text-error text-[16px]">calendar_today</span> Oct 26, 2024</p>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant flex gap-2">
+<button class="flex-1 py-2 text-center border border-outline-variant rounded font-label-caps text-label-caps text-on-surface hover:bg-surface-container-low transition-colors">Renew</button>
+<button class="flex-1 py-2 text-center bg-surface-container-low rounded font-label-caps text-label-caps text-on-surface-variant cursor-not-allowed opacity-50" disabled="">Details</button>
+</div>
+</article>
+<!-- Loan Card 2 (On Track) -->
+<article class="card-surface rounded-lg p-5 accent-bar-green academic-lift transition-all duration-300 relative overflow-hidden">
+<div class="absolute top-4 right-4 bg-[#e2f0d9] text-[#005323] font-label-caps text-label-caps px-2 py-1 rounded flex items-center gap-1 z-10 border border-[#c3e6cb]">
+                                On Track
+                            </div>
+<div class="flex gap-4">
+<div class="w-16 h-24 bg-surface-variant rounded shrink-0 overflow-hidden border border-outline-variant">
+<img alt="Book cover" class="w-full h-full object-cover" data-alt="A modern textbook cover for 'Advanced Macroeconomics'. The design is professional and academic, featuring subtle line graphs and statistical patterns overlaying a dark blue and parchment-colored background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvD1KupNwi1XH53HW4Ugcz3NTaW6RPYjbcLuJ-C2DzeJvnFGVDbWapIhhJwOPlJJ4ysgWBSt8Mkn_MJNO_Ce4rWRR7pvpcIhiPYUUWTmPqiUkLpMo45aiwGoW8GC9r0qt_n2wut-1UURdaqfuTw0zjp_NIU4Pe3lLH8ujlyXlJgZb4lEC-AYEfllChJ1QXdezEVJOcDfWUhPqdjQuJoz2-WVBquJ0VVNPVroNalgiMC5AbAlwyiOerooTRnpKpzc5vI-6Oec0iFMA"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-body-lg text-body-lg font-bold text-on-surface leading-tight mb-1">Advanced Macroeconomics</h3>
+<p class="font-meta text-meta text-on-surface-variant">David Romer</p>
+</div>
+<div class="mt-4">
+<p class="font-meta text-meta text-outline mb-1">Due Date</p>
+<p class="font-body-md text-body-md font-semibold text-on-surface">Nov 15, 2024</p>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant flex gap-2">
+<button class="flex-1 py-2 text-center border border-outline-variant rounded font-label-caps text-label-caps text-on-surface hover:bg-surface-container-low transition-colors">Renew</button>
+</div>
+</article>
+<!-- Loan Card 3 (On Track) -->
+<article class="card-surface rounded-lg p-5 accent-bar-green academic-lift transition-all duration-300 relative overflow-hidden">
+<div class="absolute top-4 right-4 bg-[#e2f0d9] text-[#005323] font-label-caps text-label-caps px-2 py-1 rounded flex items-center gap-1 z-10 border border-[#c3e6cb]">
+                                On Track
+                            </div>
+<div class="flex gap-4">
+<div class="w-16 h-24 bg-surface-variant rounded shrink-0 overflow-hidden border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-outline text-3xl">menu_book</span>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-body-lg text-body-lg font-bold text-on-surface leading-tight mb-1">Digital Design &amp; Computer Arch.</h3>
+<p class="font-meta text-meta text-on-surface-variant">David Harris</p>
+</div>
+<div class="mt-4">
+<p class="font-meta text-meta text-outline mb-1">Due Date</p>
+<p class="font-body-md text-body-md font-semibold text-on-surface">Nov 18, 2024</p>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant flex gap-2">
+<button class="flex-1 py-2 text-center border border-outline-variant rounded font-label-caps text-label-caps text-on-surface hover:bg-surface-container-low transition-colors">Renew</button>
+</div>
+</article>
+</div>
+</section>
+<section class="mt-12">
+<div class="flex justify-between items-end mb-6 border-b border-outline-variant pb-2">
+<h2 class="font-h3 text-h3 text-on-surface">Loan History</h2>
+<button class="font-meta text-meta text-primary hover:underline flex items-center"><span class="material-symbols-outlined text-[16px] mr-1">download</span> Export CSV</button>
+</div>
+<div class="card-surface rounded-lg overflow-x-auto">
+<table class="w-full text-left font-body-md text-body-md">
+<thead class="bg-surface-container-low border-b border-outline-variant font-label-caps text-label-caps text-on-surface-variant">
+<tr>
+<th class="p-4 font-normal">Title</th>
+<th class="p-4 font-normal hidden sm:table-cell">Author</th>
+<th class="p-4 font-normal">Returned</th>
+<th class="p-4 font-normal text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/50">
+<tr class="hover:bg-surface-bright transition-colors">
+<td class="p-4">
+<p class="font-bold text-on-surface">Introduction to Algorithms</p>
+<p class="text-meta text-on-surface-variant sm:hidden">Cormen, Leiserson</p>
+</td>
+<td class="p-4 hidden sm:table-cell text-on-surface-variant">Cormen, Leiserson</td>
+<td class="p-4 text-on-surface">Sep 12, 2024</td>
+<td class="p-4 text-right"><span class="inline-block px-2 py-1 bg-[#e2f0d9] text-[#005323] rounded font-meta text-meta">Returned On Time</span></td>
+</tr>
+<tr class="hover:bg-surface-bright transition-colors">
+<td class="p-4">
+<p class="font-bold text-on-surface">Clean Code</p>
+<p class="text-meta text-on-surface-variant sm:hidden">Robert C. Martin</p>
+</td>
+<td class="p-4 hidden sm:table-cell text-on-surface-variant">Robert C. Martin</td>
+<td class="p-4 text-on-surface">Aug 05, 2024</td>
+<td class="p-4 text-right"><span class="inline-block px-2 py-1 bg-[#fef3c7] text-[#92400e] rounded font-meta text-meta">Late (Paid)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- Right Column: Fines & Billing -->
+<div class="lg:col-span-1">
+<section class="sticky top-24">
+<div class="flex justify-between items-end mb-6 border-b border-outline-variant pb-2">
+<h2 class="font-h3 text-h3 text-on-surface">My Fines</h2>
+</div>
+<!-- Fine Slip Pattern Card -->
+<div class="card-surface rounded-xl overflow-hidden accent-bar-red shadow-[0_4px_20px_-4px_rgba(186,26,26,0.1)]">
+<div class="bg-surface-container-low p-6 fine-slip-pattern border-b border-outline-variant/50">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-2">Total Outstanding Balance</p>
+<h3 class="font-h1 text-h1 text-error font-bold flex items-baseline">
+<span class="text-3xl mr-1 font-serif text-error/80">₦</span>1,450
+                            </h3>
+<p class="font-meta text-meta text-error/80 mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">error</span> Accruing at ₦50/day per late item
+                            </p>
+</div>
+<div class="p-6">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant mb-4">Itemized Charges</h4>
+<ul class="space-y-4 mb-8">
+<li class="flex justify-between items-start">
+<div>
+<p class="font-body-md text-body-md font-bold text-on-surface">Late Return</p>
+<p class="font-meta text-meta text-on-surface-variant">Clean Code (3 days)</p>
+</div>
+<span class="font-body-md text-body-md font-semibold text-on-surface">₦150</span>
+</li>
+<li class="flex justify-between items-start">
+<div>
+<p class="font-body-md text-body-md font-bold text-on-surface">Lost Item Replacement</p>
+<p class="font-meta text-meta text-on-surface-variant">Design Patterns (Processing)</p>
+</div>
+<span class="font-body-md text-body-md font-semibold text-on-surface">₦1,300</span>
+</li>
+</ul>
+<button class="w-full bg-[#09A5DB] hover:bg-[#0785B0] text-white font-body-lg text-body-lg font-bold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-sm">
+                                Pay with Paystack <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+<p class="font-meta text-meta text-center text-outline mt-3">Secure payment gateway</p>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="mt-auto bg-surface-container-highest text-on-surface-variant w-full py-stack-lg px-container-margin flex flex-col md:flex-row justify-between items-center border-t border-outline-variant">
+<div class="mb-4 md:mb-0">
+<span class="font-label-caps text-label-caps text-primary">UniLibrary</span>
+<p class="font-meta text-meta mt-1">© 2024 University Library Management System | Intellectual Property Office</p>
+</div>
+<div class="flex gap-4 font-body-md text-body-md">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Library Ethics</a>
+<a class="hover:text-primary transition-colors" href="#">Contact Librarian</a>
+</div>
+</footer>
+</body></html>

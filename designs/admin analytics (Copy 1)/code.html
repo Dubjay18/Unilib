@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Academic Portal - Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400..700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Fraunces:opsz,wght@9..144,400..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-fixed": "#ffdad7",
+                      "on-secondary": "#ffffff",
+                      "surface-variant": "#e7e1dc",
+                      "surface-bright": "#fff8f3",
+                      "outline": "#8a716f",
+                      "on-surface-variant": "#574240",
+                      "on-secondary-fixed": "#00164e",
+                      "on-error-container": "#93000a",
+                      "surface": "#fff8f3",
+                      "on-primary-fixed-variant": "#842322",
+                      "on-secondary-container": "#1d3989",
+                      "secondary-fixed-dim": "#b6c4ff",
+                      "on-background": "#1d1b18",
+                      "primary": "#5b0309",
+                      "primary-container": "#7a1c1c",
+                      "background": "#fff8f3",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-high": "#ede7e2",
+                      "secondary-container": "#8fa7fe",
+                      "surface-container": "#f3ede7",
+                      "error": "#ba1a1a",
+                      "inverse-surface": "#32302d",
+                      "tertiary-fixed-dim": "#79db8d",
+                      "outline-variant": "#ddc0bd",
+                      "surface-container-lowest": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-primary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed-variant": "#005323",
+                      "inverse-on-surface": "#f6f0ea",
+                      "inverse-primary": "#ffb3ad",
+                      "secondary": "#4059aa",
+                      "on-surface": "#1d1b18",
+                      "on-primary-fixed": "#410004",
+                      "tertiary-fixed": "#95f8a7",
+                      "secondary-fixed": "#dce1ff",
+                      "on-primary-container": "#ff8981",
+                      "on-secondary-fixed-variant": "#264191",
+                      "on-tertiary-container": "#5dbe73",
+                      "surface-container-low": "#f9f2ed",
+                      "tertiary-container": "#004a1e",
+                      "surface-container-highest": "#e7e1dc",
+                      "surface-tint": "#a43b37",
+                      "tertiary": "#003112",
+                      "on-tertiary-fixed": "#00210a",
+                      "primary-fixed-dim": "#ffb3ad",
+                      "surface-dim": "#dfd9d4"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-md": "16px",
+                      "gutter": "16px",
+                      "stack-lg": "32px",
+                      "stack-sm": "8px",
+                      "section-padding-v": "110px",
+                      "container-margin": "24px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Plus Jakarta Sans"],
+                      "label-caps": ["Plus Jakarta Sans"],
+                      "h1-mobile": ["Literata"],
+                      "h1": ["Literata"],
+                      "body-md": ["Plus Jakarta Sans"],
+                      "h3": ["Literata"],
+                      "meta": ["Plus Jakarta Sans"],
+                      "h2": ["Literata"],
+                      "metrics": ["Fraunces"] 
+              },
+              "fontSize": {
+                      "body-lg": ["1.05rem", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-caps": ["0.75rem", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "h1-mobile": ["2.5rem", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "h1": ["3.5rem", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["0.95rem", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "h3": ["2rem", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "meta": ["0.85rem", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "h2": ["2.6rem", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "metric": ["3.5rem", {"lineHeight": "1", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .metric-shadow { box-shadow: 0 4px 12px rgba(122, 28, 28, 0.05); }
+        .card-hover:hover { transform: translateY(-6px); box-shadow: 0 12px 24px rgba(122, 28, 28, 0.1); transition: all 0.3s ease; }
+        .accent-bar { border-left: 6px solid #5b0309; }
+        .chart-placeholder { background: repeating-linear-gradient( 45deg, transparent, transparent 10px, rgba(138, 113, 111, 0.05) 10px, rgba(138, 113, 111, 0.05) 20px ); }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex antialiased">
+<!-- SideNavBar -->
+<nav class="bg-surface-container dark:bg-surface-container-lowest fixed left-0 top-0 h-full flex flex-col py-stack-md docked left-0 h-full w-64 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant flat no shadows z-40 hidden md:flex">
+<div class="px-container-margin mb-8 flex items-center gap-4">
+<img class="w-12 h-12 rounded-full object-cover border-2 border-outline-variant" data-alt="A small, circular avatar portrait of an academic staff member with a crimson role badge, set against a parchment background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDk0lomX6znpg9TKSuQvavs6_HF8jrqaGM-igDXNUgGqVSd2_AtVw0Pf_-_poja8mt7oEug-n7CK-HKizcHLl3_EZYtla7iVvUQtLeWyTgsxHbJ0v8O9cp8Nd0OW3aq71Vfp0jBHD9ORtf70ewdQsD5DN0YN5VwhXgfuiQ1_YCWGFKmQ_UE4Be5Rhw0GS1-LNVxAFn2O7fCyh3VeAzXts8wfO3ZdI94eQ9rtjkflgZskZXGt-aZ4tcIabTBcXCdOeh3dS5Za7r2GXg"/>
+<div>
+<h2 class="font-h3 text-h3 text-primary dark:text-primary-fixed leading-none text-xl">Academic Portal</h2>
+<p class="font-meta text-meta text-on-surface-variant">Staff Access</p>
+</div>
+</div>
+<div class="px-container-margin mb-6">
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary font-label-caps text-label-caps py-3 rounded-lg shadow-[0_4px_12px_rgba(122,28,28,0.15)] flex items-center justify-center gap-2 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+                New Entry
+            </button>
+</div>
+<div class="flex-1 overflow-y-auto px-4 flex flex-col gap-2">
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant rounded-lg mx-2 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant rounded-lg mx-2 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-body-md text-body-md">Library Catalogue</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant rounded-lg mx-2 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">swap_horiz</span>
+<span class="font-body-md text-body-md">Circulation</span>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-3 py-3 px-4 bg-primary-container dark:bg-primary-container text-on-primary-container font-bold rounded-lg mx-2 Click: bg-primary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-body-md text-body-md">Analytics</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant rounded-lg mx-2 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">System Settings</span>
+</a>
+<div class="mt-8 mb-4 border-t border-outline-variant pt-4 mx-4">
+<p class="font-label-caps text-label-caps text-outline mb-2">User Management</p>
+<div class="space-y-1">
+<button class="w-full text-left flex items-center justify-between py-2 px-2 text-on-surface-variant hover:bg-surface-variant rounded-lg">
+<span class="text-sm">Student Roles</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<button class="w-full text-left flex items-center justify-between py-2 px-2 text-on-surface-variant hover:bg-surface-variant rounded-lg">
+<span class="text-sm">Staff Roles</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<button class="w-full text-left flex items-center justify-between py-2 px-2 text-on-surface-variant hover:bg-surface-variant rounded-lg">
+<span class="text-sm">Admin Roles</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<button class="w-full text-left flex items-center justify-between py-2 px-2 text-on-surface-variant hover:bg-surface-variant rounded-lg mt-2 text-primary">
+<span class="text-sm">Department CRUD</span>
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</div>
+</div>
+</div>
+<div class="px-4 mt-auto">
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant rounded-lg mx-2 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md text-body-md">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 p-container-margin md:p-8 max-w-[1600px] w-full">
+<header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 border-b border-outline-variant pb-6">
+<div>
+<h1 class="font-h1 text-h1 text-primary">System Analytics</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Overview of library metrics, circulation trends, and department usage.</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">calendar_today</span>
+<select class="bg-surface border border-outline-variant rounded-lg pl-10 pr-8 py-2 text-on-surface-variant font-meta text-meta focus:border-primary focus:ring-primary appearance-none">
+<option>Last 30 Days</option>
+<option>This Semester</option>
+<option>Academic Year</option>
+</select>
+</div>
+<button class="bg-surface-variant text-on-surface-variant p-2 rounded-lg hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</header>
+<!-- Metric Cards Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+<div class="bg-surface border border-outline-variant rounded-xl p-6 accent-bar metric-shadow card-hover">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant">Total Catalogue Items</h3>
+<span class="material-symbols-outlined text-primary bg-primary-fixed-dim/20 p-1.5 rounded">auto_stories</span>
+</div>
+<div class="font-[Fraunces] text-5xl font-semibold text-on-background mb-2 tracking-tight">1.2M</div>
+<div class="flex items-center gap-1 text-tertiary-container text-sm font-meta">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span>+2.4% from last month</span>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-6 accent-bar metric-shadow card-hover">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant">Active Loans</h3>
+<span class="material-symbols-outlined text-primary bg-primary-fixed-dim/20 p-1.5 rounded">local_library</span>
+</div>
+<div class="font-[Fraunces] text-5xl font-semibold text-on-background mb-2 tracking-tight">45,892</div>
+<div class="flex items-center gap-1 text-tertiary-container text-sm font-meta">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span>+12% seasonal peak</span>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-6 accent-bar metric-shadow card-hover border-l-secondary">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant">Overdue Items</h3>
+<span class="material-symbols-outlined text-error bg-error-container p-1.5 rounded">warning</span>
+</div>
+<div class="font-[Fraunces] text-5xl font-semibold text-error mb-2 tracking-tight">3,421</div>
+<div class="flex items-center gap-1 text-error text-sm font-meta">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span>Requires attention</span>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-6 accent-bar metric-shadow card-hover">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant">Fines Collected</h3>
+<span class="material-symbols-outlined text-primary bg-primary-fixed-dim/20 p-1.5 rounded">payments</span>
+</div>
+<div class="font-[Fraunces] text-5xl font-semibold text-on-background mb-2 tracking-tight">$12.4k</div>
+<div class="flex items-center gap-1 text-on-surface-variant text-sm font-meta">
+<span class="material-symbols-outlined text-[16px]">trending_flat</span>
+<span>Stable trajectory</span>
+</div>
+</div>
+</section>
+<!-- Charts Section -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+<div class="bg-surface border border-outline-variant rounded-xl p-6 lg:col-span-2 metric-shadow flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-h3 text-h3 text-on-background text-xl">Borrowing Trends</h3>
+<button class="text-primary text-sm font-meta hover:underline">View Full Report</button>
+</div>
+<div class="flex-1 w-full min-h-[300px] chart-placeholder rounded-lg relative flex items-end px-4 pt-8 pb-4 gap-2 border-b-2 border-l-2 border-outline-variant">
+<!-- Faux Bar Chart -->
+<div class="flex-1 bg-secondary-container rounded-t-sm h-[40%] hover:opacity-80 transition-opacity"></div>
+<div class="flex-1 bg-secondary-container rounded-t-sm h-[60%] hover:opacity-80 transition-opacity"></div>
+<div class="flex-1 bg-primary rounded-t-sm h-[85%] hover:opacity-80 transition-opacity shadow-[0_0_15px_rgba(91,3,9,0.3)]"></div>
+<div class="flex-1 bg-secondary-container rounded-t-sm h-[50%] hover:opacity-80 transition-opacity"></div>
+<div class="flex-1 bg-secondary-container rounded-t-sm h-[70%] hover:opacity-80 transition-opacity"></div>
+<div class="flex-1 bg-secondary-container rounded-t-sm h-[90%] hover:opacity-80 transition-opacity"></div>
+<div class="flex-1 bg-secondary-container rounded-t-sm h-[65%] hover:opacity-80 transition-opacity"></div>
+</div>
+<div class="flex justify-between px-4 mt-2 font-meta text-xs text-outline">
+<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-6 metric-shadow flex flex-col">
+<h3 class="font-h3 text-h3 text-on-background text-xl mb-6">Category Usage</h3>
+<div class="flex-1 flex items-center justify-center relative">
+<!-- Faux Pie Chart using conic gradient -->
+<div class="w-48 h-48 rounded-full border-4 border-surface" style="background: conic-gradient(#5b0309 0% 35%, #8fa7fe 35% 65%, #ddc0bd 65% 85%, #f9f2ed 85% 100%); box-shadow: inset 0 0 20px rgba(0,0,0,0.1), 0 10px 20px rgba(122,28,28,0.1);">
+</div>
+<!-- Inner hole for donut -->
+<div class="absolute w-24 h-24 bg-surface rounded-full shadow-inner flex items-center justify-center flex-col">
+<span class="font-meta text-xs text-outline">Top</span>
+<span class="font-[Fraunces] text-xl font-bold text-primary">Sci/Tech</span>
+</div>
+</div>
+<div class="mt-6 space-y-2">
+<div class="flex items-center justify-between text-sm font-meta"><span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-primary"></span> Science &amp; Tech</span> <span>35%</span></div>
+<div class="flex items-center justify-between text-sm font-meta"><span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-secondary-container"></span> Humanities</span> <span>30%</span></div>
+<div class="flex items-center justify-between text-sm font-meta"><span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-outline-variant"></span> Periodicals</span> <span>20%</span></div>
+<div class="flex items-center justify-between text-sm font-meta"><span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-surface-container-low border border-outline-variant"></span> Rare Books</span> <span>15%</span></div>
+</div>
+</div>
+</section>
+<!-- Most Borrowed Table -->
+<section class="bg-surface border border-outline-variant rounded-xl metric-shadow overflow-hidden">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+<h3 class="font-h3 text-h3 text-on-background text-xl">Most Borrowed Titles</h3>
+<button class="text-primary hover:text-primary-container font-meta text-sm font-semibold flex items-center gap-1">
+                    Export CSV <span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant bg-surface">
+<th class="py-4 px-6 font-label-caps text-label-caps text-outline w-16">Rank</th>
+<th class="py-4 px-6 font-label-caps text-label-caps text-outline">Title &amp; Author</th>
+<th class="py-4 px-6 font-label-caps text-label-caps text-outline">Department</th>
+<th class="py-4 px-6 font-label-caps text-label-caps text-outline">Loans (YTD)</th>
+<th class="py-4 px-6 font-label-caps text-label-caps text-outline">Current Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant font-body-md text-on-surface-variant">
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-4 px-6 font-[Fraunces] text-xl font-semibold text-primary">1</td>
+<td class="py-4 px-6">
+<div class="font-semibold text-on-background group-hover:text-primary transition-colors">Principles of Mathematical Analysis</div>
+<div class="text-sm font-meta text-outline">Walter Rudin</div>
+</td>
+<td class="py-4 px-6">Mathematics</td>
+<td class="py-4 px-6 font-semibold">1,204</td>
+<td class="py-4 px-6"><span class="px-2 py-1 rounded bg-error-container text-on-error-container text-xs font-semibold">Waitlisted (12)</span></td>
+</tr>
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-4 px-6 font-[Fraunces] text-xl font-semibold text-on-surface-variant">2</td>
+<td class="py-4 px-6">
+<div class="font-semibold text-on-background group-hover:text-primary transition-colors">Molecular Biology of the Cell</div>
+<div class="text-sm font-meta text-outline">Bruce Alberts et al.</div>
+</td>
+<td class="py-4 px-6">Biology</td>
+<td class="py-4 px-6 font-semibold">982</td>
+<td class="py-4 px-6"><span class="px-2 py-1 rounded bg-tertiary-container/20 text-tertiary-container text-xs font-semibold">Available</span></td>
+</tr>
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-4 px-6 font-[Fraunces] text-xl font-semibold text-on-surface-variant">3</td>
+<td class="py-4 px-6">
+<div class="font-semibold text-on-background group-hover:text-primary transition-colors">A History of Western Philosophy</div>
+<div class="text-sm font-meta text-outline">Bertrand Russell</div>
+</td>
+<td class="py-4 px-6">Philosophy</td>
+<td class="py-4 px-6 font-semibold">845</td>
+<td class="py-4 px-6"><span class="px-2 py-1 rounded bg-tertiary-container/20 text-tertiary-container text-xs font-semibold">Available</span></td>
+</tr>
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-4 px-6 font-[Fraunces] text-xl font-semibold text-on-surface-variant">4</td>
+<td class="py-4 px-6">
+<div class="font-semibold text-on-background group-hover:text-primary transition-colors">Introduction to Algorithms</div>
+<div class="text-sm font-meta text-outline">Thomas H. Cormen</div>
+</td>
+<td class="py-4 px-6">Computer Science</td>
+<td class="py-4 px-6 font-semibold">790</td>
+<td class="py-4 px-6"><span class="px-2 py-1 rounded bg-error-container text-on-error-container text-xs font-semibold">Waitlisted (3)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+</body></html>

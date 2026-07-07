@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UniLibrary - Student Browse &amp; Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Literata:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-fixed": "#ffdad7",
+                      "on-secondary": "#ffffff",
+                      "surface-variant": "#e7e1dc",
+                      "surface-bright": "#fff8f3",
+                      "outline": "#8a716f",
+                      "on-surface-variant": "#574240",
+                      "on-secondary-fixed": "#00164e",
+                      "on-error-container": "#93000a",
+                      "surface": "#fff8f3",
+                      "on-primary-fixed-variant": "#842322",
+                      "on-secondary-container": "#1d3989",
+                      "secondary-fixed-dim": "#b6c4ff",
+                      "on-background": "#1d1b18",
+                      "primary": "#5b0309",
+                      "primary-container": "#7a1c1c",
+                      "background": "#fff8f3",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-high": "#ede7e2",
+                      "secondary-container": "#8fa7fe",
+                      "surface-container": "#f3ede7",
+                      "error": "#ba1a1a",
+                      "inverse-surface": "#32302d",
+                      "tertiary-fixed-dim": "#79db8d",
+                      "outline-variant": "#ddc0bd",
+                      "surface-container-lowest": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-primary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed-variant": "#005323",
+                      "inverse-on-surface": "#f6f0ea",
+                      "inverse-primary": "#ffb3ad",
+                      "secondary": "#4059aa",
+                      "on-surface": "#1d1b18",
+                      "on-primary-fixed": "#410004",
+                      "tertiary-fixed": "#95f8a7",
+                      "secondary-fixed": "#dce1ff",
+                      "on-primary-container": "#ff8981",
+                      "on-secondary-fixed-variant": "#264191",
+                      "on-tertiary-container": "#5dbe73",
+                      "surface-container-low": "#f9f2ed",
+                      "tertiary-container": "#004a1e",
+                      "surface-container-highest": "#e7e1dc",
+                      "surface-tint": "#a43b37",
+                      "tertiary": "#003112",
+                      "on-tertiary-fixed": "#00210a",
+                      "primary-fixed-dim": "#ffb3ad",
+                      "surface-dim": "#dfd9d4"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-md": "16px",
+                      "gutter": "16px",
+                      "stack-lg": "32px",
+                      "stack-sm": "8px",
+                      "section-padding-v": "110px",
+                      "container-margin": "24px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-caps": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "h1-mobile": [
+                              "Literata"
+                      ],
+                      "h1": [
+                              "Literata"
+                      ],
+                      "body-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "h3": [
+                              "Literata"
+                      ],
+                      "meta": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "h2": [
+                              "Literata"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "1.05rem",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-caps": [
+                              "0.75rem",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "h1-mobile": [
+                              "2.5rem",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "h1": [
+                              "3.5rem",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "0.95rem",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h3": [
+                              "2rem",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "meta": [
+                              "0.85rem",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "h2": [
+                              "2.6rem",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .lift-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .lift-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(122, 28, 28, 0.08);
+        }
+        .accent-bar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+        }
+        .accent-bar.available { background-color: #5dbe73; }
+        .accent-bar.checked-out { background-color: #ba1a1a; }
+      </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface-dim docked full-width top-0 border-b border-outline-variant dark:border-outline z-50">
+<div class="flex justify-between items-center w-full px-container-margin py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-stack-lg">
+<h1 class="font-h2 text-h2 text-primary dark:text-primary-fixed-dim">UniLibrary</h1>
+<!-- Desktop Navigation -->
+<nav class="hidden md:flex gap-stack-md ml-stack-lg">
+<a class="text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed font-label-caps text-label-caps pb-1" href="#">Catalogue</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-label-caps text-label-caps" href="#">My Books</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-label-caps text-label-caps" href="#">Research</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-label-caps text-label-caps" href="#">Support</a>
+</nav>
+</div>
+<div class="flex items-center gap-stack-sm">
+<!-- Search -->
+<div class="hidden lg:flex items-center bg-surface-container-low rounded-full px-4 py-2 border border-outline-variant focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant mr-2" style="font-size: 20px;">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md text-on-surface w-64 placeholder-on-surface-variant" placeholder="Search catalogue..." type="text"/>
+</div>
+<button aria-label="Notifications" class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button aria-label="Help" class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full hidden sm:block">
+<span class="material-symbols-outlined">help</span>
+</button>
+<img alt="User avatar with role badge" class="w-10 h-10 rounded-full border-2 border-primary-fixed ml-2 object-cover" data-alt="A small circular user avatar showing a professional portrait of a university student with a subtle academic badge icon overlaid in the corner. Warm, natural lighting, scholarly aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLpdVBX_dnQN_2yMknR1HzrdUCDRwI_CAXBm2by92RxCg88kJ9_cYpm5bF3aWcaT4qlSy_zJELII0IH8hF_IuvbmVFrO91gwry8ej9hWQtRtlJn2y88-vLcfa8olZGzqAs7JU7wK4W_OuWerMNc6NZCZmjgkQh2qq2f7Vn57v1up7sUGjkt-CQplUf5XIi4D0_gYwXPYPE09-ymbm1voTHLx_1jlXIycQZz6M7U_mglfSRfkz4dCXDlstZthj99Pxdv1YKGv0WVUw"/>
+</div>
+</div>
+</header>
+<main class="flex-grow flex w-full max-w-7xl mx-auto px-container-margin py-stack-lg gap-gutter mt-[80px]">
+<!-- Sidebar Navigation (Browse Categories) -->
+<aside class="hidden md:flex flex-col w-64 shrink-0 bg-surface-container rounded-xl p-stack-md self-start border border-outline-variant sticky top-[100px]">
+<h3 class="font-h3 text-h3 text-on-surface mb-stack-md">Browse</h3>
+<ul class="space-y-2">
+<li>
+<a class="flex items-center bg-primary-container text-on-primary-container font-bold rounded-lg px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">auto_stories</span>
+<span class="font-body-md text-body-md">All Subjects</span>
+</a>
+</li>
+<li>
+<a class="flex items-center text-on-surface-variant hover:bg-surface-variant rounded-lg px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">science</span>
+<span class="font-body-md text-body-md">Science &amp; Math</span>
+</a>
+</li>
+<li>
+<a class="flex items-center text-on-surface-variant hover:bg-surface-variant rounded-lg px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">history_edu</span>
+<span class="font-body-md text-body-md">History &amp; Humanities</span>
+</a>
+</li>
+<li>
+<a class="flex items-center text-on-surface-variant hover:bg-surface-variant rounded-lg px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">computer</span>
+<span class="font-body-md text-body-md">Computer Science</span>
+</a>
+</li>
+<li>
+<a class="flex items-center text-on-surface-variant hover:bg-surface-variant rounded-lg px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">palette</span>
+<span class="font-body-md text-body-md">Arts &amp; Design</span>
+</a>
+</li>
+</ul>
+</aside>
+<!-- Main Content Area -->
+<section class="flex-grow flex flex-col gap-stack-lg min-w-0">
+<div class="flex justify-between items-end border-b border-outline-variant pb-stack-sm">
+<div>
+<h2 class="font-h1 text-h1 text-on-surface mb-2">Catalogue</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Showing results for 'All Subjects'</p>
+</div>
+<div class="flex items-center gap-4 hidden sm:flex">
+<span class="font-meta text-meta text-on-surface-variant">Sort by:</span>
+<select class="bg-surface border-outline-variant rounded-md text-body-md text-on-surface py-1 pl-3 pr-8 focus:ring-primary focus:border-primary">
+<option>Relevance</option>
+<option>Newest Additions</option>
+<option>Title (A-Z)</option>
+</select>
+</div>
+</div>
+<!-- Bento Grid of Results -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Book Card 1 -->
+<article class="bg-surface rounded-lg border border-[#e6dec9] relative overflow-hidden flex flex-col lift-card h-full cursor-pointer">
+<div class="accent-bar available"></div>
+<div class="p-stack-md flex-grow flex flex-col pl-[22px]">
+<div class="flex justify-between items-start mb-4">
+<span class="inline-flex items-center px-2 py-1 rounded-[4px] bg-[#e2f0d9] text-[#005323] font-label-caps text-label-caps">
+                                Available
+                            </span>
+<button aria-label="Add to reading list" class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-1 leading-tight line-clamp-2">The Elements of Computing Systems</h3>
+<p class="font-meta text-meta text-on-surface-variant mb-4">Noam Nisan, Shimon Schocken</p>
+<div class="mt-auto">
+<div class="flex items-center mb-2">
+<span class="material-symbols-outlined text-surface-tint" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-size: 16px;">star_half</span>
+<span class="font-meta text-meta text-on-surface-variant ml-2">(4.5)</span>
+</div>
+<div class="w-full bg-surface-container-high h-[120px] rounded-md overflow-hidden relative mt-2 border border-outline-variant">
+<img alt="Book cover" class="w-full h-full object-cover opacity-80" data-alt="A highly detailed close-up of a thick academic textbook spine titled 'The Elements of Computing Systems'. The book has a modern, minimalist cover design in muted blues and whites, sitting on a polished wooden library desk. Warm, scholarly parchment aesthetic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3JQfZ_QbE9leqfjx-V1cl6sqGpO3QrGUTvYKRLz7lir7yOa-2QyHwFwVzEpm5SOZAJdFL3tOlcjzbTlUi5frw4IWfmZgWgHClETF9SZrG5qc9vpT0MEeRToeD0vbV-Nmhb2GcUVEp9tjs1yfc0P-yzOGH1LYGziILUqgnBmAHbGSDrDzEmiuDMdeFdeqyaYN5aMqXF6vHbicsngF3KZnmdefsNtl_JprjhLybQZjcBMmKBYQeGMT4DCCulPwajNQQPWrn2X4-lrE"/>
+</div>
+</div>
+</div>
+</article>
+<!-- Book Card 2 -->
+<article class="bg-surface rounded-lg border border-[#e6dec9] relative overflow-hidden flex flex-col lift-card h-full cursor-pointer">
+<div class="accent-bar checked-out"></div>
+<div class="p-stack-md flex-grow flex flex-col pl-[22px]">
+<div class="flex justify-between items-start mb-4">
+<span class="inline-flex items-center px-2 py-1 rounded-[4px] bg-[#fce8e6] text-[#93000a] font-label-caps text-label-caps">
+                                Checked Out
+                            </span>
+<button aria-label="Add to reading list" class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-1 leading-tight line-clamp-2">A Brief History of Time</h3>
+<p class="font-meta text-meta text-on-surface-variant mb-4">Stephen Hawking</p>
+<div class="mt-auto">
+<div class="flex items-center mb-2">
+<span class="material-symbols-outlined text-surface-tint" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-meta text-meta text-on-surface-variant ml-2">(5.0)</span>
+</div>
+<div class="w-full bg-surface-container-high h-[120px] rounded-md overflow-hidden relative mt-2 border border-outline-variant">
+<img alt="Book cover" class="w-full h-full object-cover opacity-80" data-alt="A detailed, scholarly image of the book cover for 'A Brief History of Time' by Stephen Hawking. The cover features a subtle celestial or cosmic design with deep blacks and stark whites, fitting a sophisticated, contemporary-classical library aesthetic. Soft, parchment-toned ambient lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhLnJzkDNMaiTQBp5QcbkhZQK_0jw6ZFrhv0Dxsec7FmM_BA0hl8B9BCaBtQVV4s4lvdrzGAGIfxDBgImNx-1LrHA1H4CMgfO1sjQJRXBrFlZu696DSRtMXTAw3Elh-I3olyk3HLXykkxGFT8d9Zk52G9f6onQQ50wZFkn-7ljnD7W3kBsEE3buwvIKN6knwXYkGuLkMNlxN4C_CEAp-FPNEC6d8dzwkMzH5i-wVGdc0zhvH9Lpyh3NEOkAxb180JPBlf5_Cm8ffk"/>
+</div>
+</div>
+</div>
+</article>
+<!-- Book Card 3 -->
+<article class="bg-surface rounded-lg border border-[#e6dec9] relative overflow-hidden flex flex-col lift-card h-full cursor-pointer ring-2 ring-secondary-container ring-offset-2">
+<div class="absolute top-2 right-2 flex gap-1 z-10">
+<span class="material-symbols-outlined text-secondary-container bg-surface rounded-full shadow-sm" style="font-size: 18px;" title="AI Recommended">auto_awesome</span>
+</div>
+<div class="accent-bar available"></div>
+<div class="p-stack-md flex-grow flex flex-col pl-[22px]">
+<div class="flex justify-between items-start mb-4">
+<span class="inline-flex items-center px-2 py-1 rounded-[4px] bg-[#e2f0d9] text-[#005323] font-label-caps text-label-caps">
+                                Available
+                            </span>
+<button aria-label="Remove from reading list" class="text-primary hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-1 leading-tight line-clamp-2">Design of Everyday Things</h3>
+<p class="font-meta text-meta text-on-surface-variant mb-4">Don Norman</p>
+<div class="mt-auto">
+<div class="flex items-center mb-2">
+<span class="material-symbols-outlined text-surface-tint" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-outline" style="font-size: 16px;">star</span>
+<span class="font-meta text-meta text-on-surface-variant ml-2">(4.0)</span>
+</div>
+<div class="w-full bg-surface-container-high h-[120px] rounded-md overflow-hidden relative mt-2 border border-outline-variant">
+<img alt="Book cover" class="w-full h-full object-cover opacity-80" data-alt="A close-up of a classic academic edition of 'The Design of Everyday Things'. The cover is minimalist, displaying elegant typography and a subtle geometric illustration. It rests on a textured, parchment-colored surface, embodying a refined, scholarly atmosphere with warm natural light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEP_qp6th3i2112lrD9gj1xuYWvX24IzgMCAztXQYCxXxlpisF9pjNPjR9aA7LDaQmhLEziIanPHLXBLuhfcNWhVPHb27Bpp53Oo5-kwazVV2Uw0u3Yybis1WDKEx86UKG2aZ_k8QTFzNycSYqotmTVzXKegM3hhhBHxqARHNb3T7YsxvNMy8mBGVcGoScRlEZAt6a2reLEKNRidXdlENM2IJdumVmygKWS964vtkPFuc4x0k4fSv24-dP9BPWABfsgeE1SEdVp68"/>
+</div>
+</div>
+</div>
+</article>
+</div>
+<!-- Detail View Example (Simulated below the grid for demonstration) -->
+<div class="mt-section-padding-v border-t border-outline-variant pt-stack-lg">
+<h2 class="font-h2 text-h2 text-on-surface mb-stack-lg">Selected Record</h2>
+<div class="bg-surface rounded-xl border border-[#e6dec9] p-stack-lg flex flex-col md:flex-row gap-stack-lg shadow-[0_4px_24px_rgba(122,28,28,0.03)] relative overflow-hidden">
+<div class="accent-bar available w-2 md:w-3"></div>
+<!-- Cover Image -->
+<div class="w-full md:w-1/3 lg:w-1/4 shrink-0 flex flex-col items-center pl-4 md:pl-6">
+<div class="w-full aspect-[2/3] bg-surface-container-high rounded-lg shadow-lg border border-outline-variant overflow-hidden mb-stack-md">
+<img alt="Detailed book cover" class="w-full h-full object-cover" data-alt="A large, highly detailed studio photograph of the spine and front cover of a prestigious university hardcover textbook. The binding is rich, deep red with gold foil lettering. The setting is a classic academic library desk, illuminated by soft, warm light against a pale, parchment-toned background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg59RwM8ad-XEcOEapj3tCRyMe32Un-LJiA5Swq-RrffcWz9G7w9uWEHjod-T2GwqSfRLMxXoUbm4Xzf6JAVbJ9-XjVwyzXQENR3DGSaZ2fU9we35rZFud9R_YedQZ3tVuX1Zojy_s-oapeFCbg38zucAZJv9LG2kc3NgsPizXV1iPfSyCq1kiWEMEncteD6qNI4urzOGjtOPJjrl8s2PGWBLcrChw8FF2FOw_7RvJjgBfSrZ6Tgr9GkHwpk4lkDXIX4Tapyt8PgE"/>
+</div>
+<div class="flex gap-2 justify-center w-full">
+<span class="inline-flex items-center px-3 py-1.5 rounded-[4px] bg-[#e2f0d9] text-[#005323] font-label-caps text-label-caps border border-[#b2d8a3]">
+                                3 Copies Available
+                            </span>
+</div>
+</div>
+<!-- Metadata & Actions -->
+<div class="flex-grow flex flex-col">
+<div class="flex justify-between items-start">
+<div>
+<h1 class="font-h1 text-h1 text-on-surface mb-2">The Elements of Computing Systems</h1>
+<p class="font-h3 text-h3 text-on-surface-variant mb-1">Building a Modern Computer from First Principles</p>
+<p class="font-body-lg text-body-lg text-primary-container font-semibold mb-4">Noam Nisan, Shimon Schocken</p>
+</div>
+<button aria-label="Add to reading list" class="p-3 text-outline hover:text-primary bg-surface-container-lowest rounded-full border border-outline-variant hover:border-primary transition-all shadow-sm">
+<span class="material-symbols-outlined" style="font-size: 28px;">favorite</span>
+</button>
+</div>
+<div class="flex items-center gap-4 mb-stack-lg pb-stack-md border-b border-outline-variant">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-surface-tint" style="font-size: 20px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-size: 20px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-size: 20px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-size: 20px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-size: 20px;">star_half</span>
+<span class="font-body-md text-body-md text-on-surface ml-2 font-semibold">4.5</span>
+<span class="font-meta text-meta text-on-surface-variant ml-1">(128 Reviews)</span>
+</div>
+<span class="text-outline-variant">|</span>
+<span class="font-meta text-meta text-on-surface-variant">Published: 2005 (MIT Press)</span>
+<span class="text-outline-variant">|</span>
+<span class="font-meta text-meta text-on-surface-variant">ISBN: 9780262640688</span>
+</div>
+<div class="prose max-w-none text-body-md text-on-surface-variant mb-stack-lg">
+<p class="mb-4">This textbook provides an integrated and rigorous introduction to computer science, building a complete hardware platform and software hierarchy from the ground up.</p>
+<p>Students will learn how to design logic gates, build a CPU, develop an assembler, a virtual machine, a compiler, and finally, a basic operating system, gaining a profound understanding of how computers actually work.</p>
+</div>
+<div class="mt-auto flex flex-wrap gap-stack-md">
+<button class="bg-primary text-on-primary font-body-lg text-body-lg font-semibold py-3 px-8 rounded-lg shadow-[0_4px_12px_rgba(122,28,28,0.15)] hover:bg-primary-container transition-colors flex items-center">
+<span class="material-symbols-outlined mr-2">shopping_cart_checkout</span>
+                                Borrow Copy
+                            </button>
+<button class="bg-surface-container text-on-surface font-body-lg text-body-lg font-semibold py-3 px-8 rounded-lg border border-outline-variant hover:bg-surface-container-high transition-colors flex items-center">
+<span class="material-symbols-outlined mr-2">bookmark_add</span>
+                                Reserve
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface mt-section-padding-v w-full py-stack-lg px-container-margin flex flex-col md:flex-row justify-between items-center border-t border-outline-variant transition-opacity duration-300">
+<div class="mb-stack-md md:mb-0">
+<span class="font-label-caps text-label-caps text-primary dark:text-primary-fixed block mb-2 text-center md:text-left">UniLibrary</span>
+<p class="font-meta text-meta text-on-surface-variant dark:text-inverse-on-surface">© 2024 University Library Management System | Intellectual Property Office</p>
+</div>
+<nav class="flex gap-stack-md">
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:underline decoration-primary transition-all" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:underline decoration-primary transition-all" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:underline decoration-primary transition-all" href="#">Library Ethics</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:underline decoration-primary transition-all" href="#">Contact Librarian</a>
+</nav>
+</footer>
+</body></html>

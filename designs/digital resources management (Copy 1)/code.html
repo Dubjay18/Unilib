@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UniLibrary Digital Resources</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400..700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#ffdad7",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e7e1dc",
+                        "surface-bright": "#fff8f3",
+                        "outline": "#8a716f",
+                        "on-surface-variant": "#574240",
+                        "on-secondary-fixed": "#00164e",
+                        "on-error-container": "#93000a",
+                        "surface": "#fff8f3",
+                        "on-primary-fixed-variant": "#842322",
+                        "on-secondary-container": "#1d3989",
+                        "secondary-fixed-dim": "#b6c4ff",
+                        "on-background": "#1d1b18",
+                        "primary": "#5b0309",
+                        "primary-container": "#7a1c1c",
+                        "background": "#fff8f3",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#ede7e2",
+                        "secondary-container": "#8fa7fe",
+                        "surface-container": "#f3ede7",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#32302d",
+                        "tertiary-fixed-dim": "#79db8d",
+                        "outline-variant": "#ddc0bd",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#005323",
+                        "inverse-on-surface": "#f6f0ea",
+                        "inverse-primary": "#ffb3ad",
+                        "secondary": "#4059aa",
+                        "on-surface": "#1d1b18",
+                        "on-primary-fixed": "#410004",
+                        "tertiary-fixed": "#95f8a7",
+                        "secondary-fixed": "#dce1ff",
+                        "on-primary-container": "#ff8981",
+                        "on-secondary-fixed-variant": "#264191",
+                        "on-tertiary-container": "#5dbe73",
+                        "surface-container-low": "#f9f2ed",
+                        "tertiary-container": "#004a1e",
+                        "surface-container-highest": "#e7e1dc",
+                        "surface-tint": "#a43b37",
+                        "tertiary": "#003112",
+                        "on-tertiary-fixed": "#00210a",
+                        "primary-fixed-dim": "#ffb3ad",
+                        "surface-dim": "#dfd9d4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "gutter": "16px",
+                        "stack-lg": "32px",
+                        "stack-sm": "8px",
+                        "section-padding-v": "110px",
+                        "container-margin": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-caps": ["Plus Jakarta Sans"],
+                        "h1-mobile": ["Literata"],
+                        "h1": ["Literata"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "h3": ["Literata"],
+                        "meta": ["Plus Jakarta Sans"],
+                        "h2": ["Literata"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["1.05rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-caps": ["0.75rem", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "h1-mobile": ["2.5rem", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "h1": ["3.5rem", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["0.95rem", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h3": ["2rem", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "meta": ["0.85rem", { "lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "h2": ["2.6rem", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #fdfbf7; /* Parchment base */
+            color: theme('colors.on-background');
+        }
+        .academic-shadow {
+            box-shadow: 0 4px 6px -1px rgba(122, 28, 28, 0.05), 0 2px 4px -1px rgba(122, 28, 28, 0.03);
+        }
+        .academic-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 15px -3px rgba(122, 28, 28, 0.1), 0 4px 6px -2px rgba(122, 28, 28, 0.05);
+        }
+        .accent-bar {
+            border-left: 6px solid theme('colors.primary-container');
+        }
+        .accent-bar-success {
+            border-left: 6px solid #e2f0d9;
+        }
+        .accent-bar-warning {
+            border-left: 6px solid #fcf0e3;
+        }
+        .modal-backdrop {
+            background-color: rgba(29, 27, 24, 0.6);
+            backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+<body class="font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-surface-dim docked full-width top-0 border-b border-outline-variant dark:border-outline z-40 sticky">
+<div class="flex justify-between items-center w-full px-container-margin py-4 max-w-7xl mx-auto">
+<!-- Brand -->
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="local_library">local_library</span>
+<span class="font-h2 text-h2 text-primary dark:text-primary-fixed-dim hidden sm:block">UniLibrary</span>
+</div>
+<!-- Navigation Links (Desktop) -->
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-all px-3 py-2 rounded-md font-label-caps text-label-caps flex flex-col items-center" href="#">
+<span class="material-symbols-outlined mb-1 text-xl" data-icon="menu_book">menu_book</span>
+                    Catalogue
+                </a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-all px-3 py-2 rounded-md font-label-caps text-label-caps flex flex-col items-center" href="#">
+<span class="material-symbols-outlined mb-1 text-xl" data-icon="collections_bookmark">collections_bookmark</span>
+                    My Books
+                </a>
+<a class="text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed font-bold pb-1 flex flex-col items-center px-3 pt-2" href="#">
+<span class="material-symbols-outlined mb-1 text-xl" data-icon="science">science</span>
+<span class="font-label-caps text-label-caps">Research</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-all px-3 py-2 rounded-md font-label-caps text-label-caps flex flex-col items-center" href="#">
+<span class="material-symbols-outlined mb-1 text-xl" data-icon="help_center">help_center</span>
+                    Support
+                </a>
+</div>
+<!-- Trailing Actions & Profile -->
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border border-outline-variant ml-2">
+<img alt="User avatar with role badge" class="w-full h-full object-cover" data-alt="A small circular avatar showing a professional, academic staff member in soft, warm lighting against a parchment-toned background. The mood is approachable yet scholarly, matching a high-end university system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCct1BOCaabaBu1kPnLoPzl4-hGvsbNiLmrWUdGPZLd-xnYehBWMjCD2XeJpZzIf173ld0SLs1uOOpuBzmrY4o5GC9Eubaiefd-fHRb28i-WxJKYb9SuJOXriHx2F2BegGF9HOm81Li1UTx1V0JyGF3awD9VbxN2wzHTJTXfUWCBbl4lOnbpSdsB3va0wADLQY7nbGEl70_TcHYVY5mVvP0zG8H9TNOrRmDsDKYBw8LeQ7RLqnB4n2hd59mxPGn827y_1ff09Bpk0Q"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Layout -->
+<div class="flex flex-1 max-w-7xl mx-auto w-full px-container-margin py-stack-lg gap-gutter">
+<!-- Optional Left Navigation / Filter Sidebar (Simulated for layout context) -->
+<aside class="hidden lg:block w-64 flex-shrink-0">
+<div class="sticky top-[100px] bg-surface rounded-lg p-6 border border-[#e6dec9] academic-shadow">
+<h3 class="font-h3 text-h3 text-on-background mb-6">Collections</h3>
+<ul class="space-y-4">
+<li>
+<a class="font-body-md text-body-md text-primary font-bold flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
+                            Digital Resources
+                        </a>
+</li>
+<li>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+                            Special Archives
+                        </a>
+</li>
+<li>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" data-icon="article">article</span>
+                            Journals
+                        </a>
+</li>
+</ul>
+<div class="mt-8 pt-6 border-t border-[#e6dec9]">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant mb-4">Resource Type</h4>
+<label class="flex items-center gap-2 mb-2 font-body-md text-body-md cursor-pointer">
+<input checked="" class="rounded text-primary focus:ring-primary bg-background border-[#e6dec9]" type="checkbox"/>
+                         PDF Documents
+                     </label>
+<label class="flex items-center gap-2 mb-2 font-body-md text-body-md cursor-pointer">
+<input checked="" class="rounded text-primary focus:ring-primary bg-background border-[#e6dec9]" type="checkbox"/>
+                         eBooks (EPUB)
+                     </label>
+<label class="flex items-center gap-2 font-body-md text-body-md cursor-pointer">
+<input class="rounded text-primary focus:ring-primary bg-background border-[#e6dec9]" type="checkbox"/>
+                         Multimedia
+                     </label>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 min-w-0">
+<!-- Page Header & Actions -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+<div>
+<h1 class="font-h1 text-h1 text-on-background mb-2">Digital Resources</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Access and manage the university's digital repository.</p>
+</div>
+<!-- Staff Actions (Management View) -->
+<div class="flex items-center gap-3 bg-surface p-2 rounded-lg border border-[#e6dec9] shadow-sm">
+<span class="px-3 py-1 bg-surface-container-low text-on-surface-variant font-meta text-meta rounded-md flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="admin_panel_settings">admin_panel_settings</span>
+                        Staff Mode
+                    </span>
+<button class="bg-primary text-on-primary hover:bg-primary-container transition-colors px-4 py-2 rounded-lg font-body-md text-body-md font-semibold flex items-center gap-2" onclick="document.getElementById('upload-modal').classList.remove('hidden')">
+<span class="material-symbols-outlined" data-icon="upload_file">upload_file</span>
+                        Upload Resource
+                    </button>
+</div>
+</div>
+<!-- Search and Filter Bar -->
+<div class="bg-surface rounded-xl border border-[#e6dec9] p-2 flex items-center gap-2 mb-8 shadow-sm">
+<span class="material-symbols-outlined text-on-surface-variant pl-3" data-icon="search">search</span>
+<input class="flex-1 bg-transparent border-none focus:ring-0 font-body-md text-body-md text-on-background placeholder:text-on-surface-variant/60" placeholder="Search by title, author, or keyword..." type="text"/>
+<div class="h-6 w-px bg-outline-variant mx-2"></div>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-lg transition-colors flex items-center gap-2 font-meta text-meta">
+<span class="material-symbols-outlined text-sm" data-icon="tune">tune</span>
+<span class="hidden sm:inline">Advanced</span>
+</button>
+</div>
+<!-- Resource Grid (Bento/Card Layout) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 (PDF) -->
+<div class="bg-surface rounded-xl border border-[#e6dec9] overflow-hidden academic-shadow academic-hover transition-all duration-300 relative group flex flex-col h-full accent-bar-success">
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-3xl" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<!-- Status Badge -->
+<span class="px-2 py-1 bg-[#e2f0d9] text-[#2e5e1b] font-label-caps text-[10px] rounded flex items-center gap-1 border border-[#c1dfb3]">
+<span class="material-symbols-outlined text-[12px]" data-icon="check_circle">check_circle</span>
+                                Available
+                            </span>
+</div>
+<h3 class="font-h3 text-xl text-on-background mb-2 line-clamp-2">The Principles of Quantum Mechanics, 4th Ed.</h3>
+<p class="font-meta text-meta text-on-surface-variant mb-4">P.A.M. Dirac</p>
+<div class="mt-auto pt-4 border-t border-[#e6dec9]/50 flex justify-between items-center">
+<span class="font-meta text-meta text-outline">Added: Oct 12, 2023</span>
+<span class="font-meta text-meta text-outline">12 MB</span>
+</div>
+</div>
+<!-- Management Actions Overlay (Staff only) -->
+<div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity bg-surface/90 backdrop-blur-sm rounded-lg shadow-sm border border-[#e6dec9] p-1 flex gap-1 z-10 translate-y-[-10px] group-hover:translate-y-0">
+<button class="p-1.5 text-on-surface-variant hover:text-primary rounded hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-sm" data-icon="edit">edit</span></button>
+<button class="p-1.5 text-on-surface-variant hover:text-error rounded hover:bg-error-container transition-colors"><span class="material-symbols-outlined text-sm" data-icon="delete">delete</span></button>
+</div>
+</div>
+<!-- Card 2 (Ebook/EPUB - Reserved) -->
+<div class="bg-surface rounded-xl border border-[#e6dec9] overflow-hidden academic-shadow academic-hover transition-all duration-300 relative group flex flex-col h-full accent-bar-warning">
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-3xl" data-icon="auto_stories">auto_stories</span>
+</div>
+<span class="px-2 py-1 bg-[#fcf0e3] text-[#8a5b28] font-label-caps text-[10px] rounded flex items-center gap-1 border border-[#f5dab8]">
+<span class="material-symbols-outlined text-[12px]" data-icon="bookmark">bookmark</span>
+                                Reserved (2)
+                            </span>
+</div>
+<h3 class="font-h3 text-xl text-on-background mb-2 line-clamp-2">A History of Western Philosophy</h3>
+<p class="font-meta text-meta text-on-surface-variant mb-4">Bertrand Russell</p>
+<div class="mt-auto pt-4 border-t border-[#e6dec9]/50 flex justify-between items-center">
+<span class="font-meta text-meta text-outline">Added: Nov 05, 2023</span>
+<span class="font-meta text-meta text-outline">EPUB • 4 MB</span>
+</div>
+</div>
+<div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity bg-surface/90 backdrop-blur-sm rounded-lg shadow-sm border border-[#e6dec9] p-1 flex gap-1 z-10 translate-y-[-10px] group-hover:translate-y-0">
+<button class="p-1.5 text-on-surface-variant hover:text-primary rounded hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-sm" data-icon="edit">edit</span></button>
+<button class="p-1.5 text-on-surface-variant hover:text-error rounded hover:bg-error-container transition-colors"><span class="material-symbols-outlined text-sm" data-icon="delete">delete</span></button>
+</div>
+</div>
+<!-- Card 3 (Maintenance) -->
+<div class="bg-surface rounded-xl border border-[#e6dec9] overflow-hidden academic-shadow transition-all duration-300 relative flex flex-col h-full accent-bar opacity-75 grayscale-[20%]">
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-3xl" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<span class="px-2 py-1 bg-surface-container-high text-on-surface-variant font-label-caps text-[10px] rounded flex items-center gap-1 border border-outline-variant">
+<span class="material-symbols-outlined text-[12px]" data-icon="build">build</span>
+                                Maintenance
+                            </span>
+</div>
+<h3 class="font-h3 text-xl text-on-surface-variant mb-2 line-clamp-2">Structural Analysis Approaches in Modern Engineering</h3>
+<p class="font-meta text-meta text-outline mb-4">Various Authors</p>
+<div class="mt-auto pt-4 border-t border-[#e6dec9]/50 flex justify-between items-center">
+<span class="font-meta text-meta text-error flex items-center gap-1"><span class="material-symbols-outlined text-[14px]" data-icon="info">info</span> File corrupt, re-uploading</span>
+</div>
+</div>
+<div class="absolute inset-0 bg-surface/20 flex items-center justify-center pointer-events-none">
+<!-- Visual overlay for maintenance -->
+</div>
+</div>
+<!-- Card 4 (PDF) -->
+<div class="bg-surface rounded-xl border border-[#e6dec9] overflow-hidden academic-shadow academic-hover transition-all duration-300 relative group flex flex-col h-full accent-bar-success">
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-3xl" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<span class="px-2 py-1 bg-[#e2f0d9] text-[#2e5e1b] font-label-caps text-[10px] rounded flex items-center gap-1 border border-[#c1dfb3]">
+<span class="material-symbols-outlined text-[12px]" data-icon="check_circle">check_circle</span>
+                                Available
+                            </span>
+</div>
+<h3 class="font-h3 text-xl text-on-background mb-2 line-clamp-2">Introduction to Machine Learning Archives</h3>
+<p class="font-meta text-meta text-on-surface-variant mb-4">Dept. of Computer Science</p>
+<div class="mt-auto pt-4 border-t border-[#e6dec9]/50 flex justify-between items-center">
+<span class="font-meta text-meta text-outline">Added: Jan 22, 2024</span>
+<span class="font-meta text-meta text-outline">8.5 MB</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Load More / Pagination -->
+<div class="mt-10 flex justify-center">
+<button class="px-6 py-2 border border-[#e6dec9] bg-surface text-on-surface-variant hover:text-primary hover:border-outline transition-colors rounded-full font-body-md text-body-md font-semibold">
+                    Load More Resources
+                </button>
+</div>
+</main>
+</div>
+<!-- Upload Modal (Staff Pattern) -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" id="upload-modal">
+<div class="modal-backdrop absolute inset-0" onclick="document.getElementById('upload-modal').classList.add('hidden')"></div>
+<div class="bg-surface rounded-xl border border-[#e6dec9] shadow-2xl w-full max-w-2xl relative z-10 flex flex-col max-h-[921px]">
+<!-- Modal Header -->
+<div class="px-6 py-4 border-b border-[#e6dec9] flex justify-between items-center bg-surface-bright rounded-t-xl">
+<div>
+<h2 class="font-h3 text-2xl text-on-background">Upload Digital Resource</h2>
+<p class="font-meta text-meta text-on-surface-variant">Add new materials to the digital catalogue.</p>
+</div>
+<button class="p-2 text-outline hover:bg-surface-container rounded-full transition-colors" onclick="document.getElementById('upload-modal').classList.add('hidden')">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Modal Body (Scrollable) -->
+<div class="p-6 overflow-y-auto font-body-md">
+<!-- Drag & Drop Zone -->
+<div class="border-2 border-dashed border-[#ddc0bd] rounded-xl bg-[#fdfbf7] p-8 flex flex-col items-center justify-center text-center mb-6 hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="w-16 h-16 rounded-full bg-primary-fixed-dim/30 flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl" data-icon="cloud_upload">cloud_upload</span>
+</div>
+<p class="font-body-lg font-semibold text-on-background mb-1">Drag &amp; drop files here</p>
+<p class="font-meta text-on-surface-variant mb-4">or click to browse (PDF, EPUB, max 50MB)</p>
+<button class="px-4 py-2 bg-surface border border-[#e6dec9] rounded-lg text-on-surface-variant font-semibold hover:text-primary transition-colors text-sm">Browse Files</button>
+</div>
+<!-- Metadata Fields -->
+<div class="space-y-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-1">Resource Title *</label>
+<input class="w-full bg-[#fdfbf7] border border-[#e6dec9] rounded-lg px-3 py-2 text-on-background focus:ring-1 focus:ring-primary focus:border-primary" placeholder="Enter title" type="text"/>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-1">Author / Creator</label>
+<input class="w-full bg-[#fdfbf7] border border-[#e6dec9] rounded-lg px-3 py-2 text-on-background focus:ring-1 focus:ring-primary focus:border-primary" placeholder="e.g., J. Smith" type="text"/>
+</div>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-1">Category / Tags</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-xl" data-icon="sell">sell</span>
+<input class="w-full bg-[#fdfbf7] border border-[#e6dec9] rounded-lg pl-10 pr-3 py-2 text-on-background focus:ring-1 focus:ring-primary focus:border-primary AI-Integrated Elements" placeholder="Add tags separated by comma... AI suggested tags available" type="text"/>
+</div>
+<div class="flex gap-2 mt-2">
+<span class="px-2 py-1 bg-secondary-fixed-dim/20 text-on-secondary-container rounded-md font-meta text-[11px] border border-secondary-fixed-dim cursor-pointer hover:bg-secondary-fixed-dim/40 transition-colors">Philosophy +</span>
+<span class="px-2 py-1 bg-secondary-fixed-dim/20 text-on-secondary-container rounded-md font-meta text-[11px] border border-secondary-fixed-dim cursor-pointer hover:bg-secondary-fixed-dim/40 transition-colors">Science +</span>
+</div>
+</div>
+<!-- Visibility Toggle -->
+<div class="pt-4 border-t border-[#e6dec9] flex items-center justify-between">
+<div>
+<h4 class="font-body-md font-semibold text-on-background">Public Visibility</h4>
+<p class="font-meta text-on-surface-variant">Allow students to view and download this resource.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="px-6 py-4 border-t border-[#e6dec9] bg-surface-bright rounded-b-xl flex justify-end gap-3">
+<button class="px-4 py-2 bg-transparent text-on-surface-variant hover:bg-surface-container font-body-md font-semibold rounded-lg transition-colors" onclick="document.getElementById('upload-modal').classList.add('hidden')">Cancel</button>
+<button class="px-6 py-2 bg-primary text-on-primary hover:bg-primary-container font-body-md font-semibold rounded-lg transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="cloud_done">cloud_done</span>
+                    Upload &amp; Save
+                </button>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant mt-auto">
+<div class="w-full py-stack-lg px-container-margin flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto">
+<div class="text-on-surface-variant dark:text-inverse-on-surface font-meta text-meta mb-4 md:mb-0 text-center md:text-left">
+                © 2024 University Library Management System | Intellectual Property Office
+            </div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-opacity duration-300 hover:underline decoration-primary font-body-md text-body-md" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-opacity duration-300 hover:underline decoration-primary font-body-md text-body-md" href="#">Terms of Service</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-opacity duration-300 hover:underline decoration-primary font-body-md text-body-md" href="#">Library Ethics</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-opacity duration-300 hover:underline decoration-primary font-body-md text-body-md" href="#">Contact Librarian</a>
+</div>
+</div>
+</footer>
+</body></html>

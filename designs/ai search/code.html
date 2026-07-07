@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Student Portal Home | UniLibrary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,600;7..72,700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#ffdad7",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e7e1dc",
+                        "surface-bright": "#fff8f3",
+                        "outline": "#8a716f",
+                        "on-surface-variant": "#574240",
+                        "on-secondary-fixed": "#00164e",
+                        "on-error-container": "#93000a",
+                        "surface": "#fff8f3",
+                        "on-primary-fixed-variant": "#842322",
+                        "on-secondary-container": "#1d3989",
+                        "secondary-fixed-dim": "#b6c4ff",
+                        "on-background": "#1d1b18",
+                        "primary": "#5b0309",
+                        "primary-container": "#7a1c1c",
+                        "background": "#fff8f3",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#ede7e2",
+                        "secondary-container": "#8fa7fe",
+                        "surface-container": "#f3ede7",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#32302d",
+                        "tertiary-fixed-dim": "#79db8d",
+                        "outline-variant": "#ddc0bd",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#005323",
+                        "inverse-on-surface": "#f6f0ea",
+                        "inverse-primary": "#ffb3ad",
+                        "secondary": "#4059aa",
+                        "on-surface": "#1d1b18",
+                        "on-primary-fixed": "#410004",
+                        "tertiary-fixed": "#95f8a7",
+                        "secondary-fixed": "#dce1ff",
+                        "on-primary-container": "#ff8981",
+                        "on-secondary-fixed-variant": "#264191",
+                        "on-tertiary-container": "#5dbe73",
+                        "surface-container-low": "#f9f2ed",
+                        "tertiary-container": "#004a1e",
+                        "surface-container-highest": "#e7e1dc",
+                        "surface-tint": "#a43b37",
+                        "tertiary": "#003112",
+                        "on-tertiary-fixed": "#00210a",
+                        "primary-fixed-dim": "#ffb3ad",
+                        "surface-dim": "#dfd9d4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "gutter": "16px",
+                        "stack-lg": "32px",
+                        "stack-sm": "8px",
+                        "section-padding-v": "110px",
+                        "container-margin": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-caps": ["Plus Jakarta Sans"],
+                        "h1-mobile": ["Literata"],
+                        "h1": ["Literata"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "h3": ["Literata"],
+                        "meta": ["Plus Jakarta Sans"],
+                        "h2": ["Literata"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["1.05rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-caps": ["0.75rem", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "h1-mobile": ["2.5rem", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "h1": ["3.5rem", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["0.95rem", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h3": ["2rem", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "meta": ["0.85rem", { "lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "h2": ["2.6rem", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #fdfbf7;
+        }
+        .ai-glow {
+            box-shadow: 0 0 15px rgba(29, 57, 137, 0.15);
+            border: 1px solid rgba(29, 57, 137, 0.3);
+        }
+        .crimson-shadow {
+            box-shadow: 0 4px 6px rgba(122, 28, 28, 0.05);
+        }
+        .card-lift:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(122, 28, 28, 0.1);
+        }
+        .accent-bar {
+            border-left: 6px solid #5b0309;
+        }
+        .accent-bar-ai {
+            border-left: 6px solid #1d3989;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface text-primary font-h3 text-h3 docked full-width top-0 border-b border-outline-variant flat no shadows flex justify-between items-center w-full px-container-margin py-4 max-w-7xl mx-auto z-50 sticky">
+<div class="flex items-center gap-6">
+<span class="font-h2 text-h2 text-primary">UniLibrary</span>
+<div class="hidden md:flex items-center gap-gutter">
+<a class="font-label-caps text-label-caps text-primary border-b-2 border-primary font-bold pb-1" href="#">Catalogue</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-low transition-all" href="#">My Books</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-low transition-all" href="#">Research</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-low transition-all" href="#">Support</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button aria-label="notifications" class="p-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button aria-label="help" class="p-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-full transition-all">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img alt="User avatar with role badge" class="w-full h-full object-cover" data-alt="A small circular avatar image depicting a scholarly student or professor in a well-lit academic setting. The image should be suitable for a profile picture in a university portal, conveying professionalism and intellectual curiosity within a warm, classical-contemporary aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPDiPRVCZ5ghtBu1JMkqcs07FbT1WgcwF_3D_cE5g8ea1_QtmPZ_P0s4vlmaMIlbXr5v-eeWGFE4_01zeM0IDdyTaz8kICD5QFYzeiJSTuYL1V0nTZtpE9s_DWaAtWzRhNkfmBMTbG1R8tMfR-NvW1ywa0PXzeBwW3HA8dNPChtdc2Xnfm9VvgUnKBqo_MXwaESLVLpVLGCb-K1lUr1e0xedZXaX7IbkBkD89T2hbix0QxCfMvP51mOTgEDIiVRBDEKxy-UGe5WjQ"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow w-full max-w-7xl mx-auto px-container-margin py-stack-lg md:py-[64px] lg:py-[100px]">
+<!-- Search Section -->
+<section class="max-w-4xl mx-auto text-center mb-[100px]">
+<h1 class="font-h1-mobile md:font-h1 text-h1-mobile md:text-h1 text-primary mb-stack-lg">Discover Knowledge</h1>
+<div class="relative w-full ai-glow bg-surface rounded-xl flex items-center p-2 mb-stack-md transition-all focus-within:shadow-lg">
+<span class="material-symbols-outlined text-secondary ml-4 mr-2">temp_preferences_custom</span>
+<input class="w-full bg-transparent border-none focus:ring-0 font-body-lg text-body-lg text-on-surface placeholder-on-surface-variant py-4 px-2" placeholder="Try: sci-fi like Dune exploring ecological themes..." type="text"/>
+<button class="bg-primary text-on-primary font-label-caps text-label-caps px-6 py-3 rounded-lg ml-2 hover:bg-primary-container transition-colors crimson-shadow">Search</button>
+</div>
+<!-- Interpreted Query -->
+<div class="text-left bg-surface-container-low rounded-lg p-stack-md border border-outline-variant flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary mt-1">psychology</span>
+<div>
+<p class="font-meta text-meta text-on-surface-variant uppercase tracking-wider mb-1">AI Interpretation</p>
+<p class="font-body-md text-body-md text-on-surface">Searching for narrative fiction in the <strong>Science Fiction</strong> genre with central themes of <strong>Ecology</strong>, <strong>Politics</strong>, and <strong>Resource Scarcity</strong>. Prioritizing seminal works post-1960.</p>
+</div>
+</div>
+</section>
+<!-- AI Recommendations Bento Grid -->
+<section>
+<div class="flex items-center gap-3 mb-stack-lg">
+<span class="material-symbols-outlined text-secondary text-2xl">auto_awesome</span>
+<h2 class="font-h2 text-h2 text-primary">Curated Recommendations</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Book Card 1 -->
+<article class="bg-surface rounded-lg border border-[#e6dec9] accent-bar-ai p-stack-md card-lift transition-all cursor-pointer flex flex-col h-full">
+<div class="h-48 mb-stack-md rounded bg-surface-container-highest overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A book cover design for a classic science fiction novel focusing on ecological themes. The cover features an abstract representation of a harsh desert landscape with subtle technological elements embedded in the sand. The color palette utilizes warm parchment tones, deep crimson reds, and stark navy blues, evoking a sense of ancient history combined with futuristic concepts in a scholarly aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOxUTo5iJcEtKGodi5LSxBxaud5_XDeOvdzGWL2n-1xZEdf2v29nE27vV96CwrwfVSMqsbjekyasd-lZuFHACRGz09N3SVDveH926FO0EMM3okf7qT9i2KPfYggh8maAjVnikKeQgwRvaIl5AhzNgGEKV0s38dXgvBzuEiSws7cxAlAmvhSAdwQ2kphWrV6IuDgjrvlGbIR6FxMvYE-wMUaQFusrU63ycRH2r9kuVni8jX04zRcCIZqdhVxlRg8mk1ViwLBRmh0uY"/>
+<div class="absolute top-2 right-2 bg-surface-bright/90 backdrop-blur-sm px-2 py-1 rounded text-xs font-meta text-secondary border border-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">psychology</span> AI Match
+                        </div>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-1 text-xl">The Dispossessed</h3>
+<p class="font-meta text-meta text-on-surface-variant mb-stack-md">Ursula K. Le Guin</p>
+<div class="mt-auto pt-stack-sm border-t border-[#e6dec9] flex justify-between items-center">
+<span class="bg-[#e2f0d9] text-[#005323] px-2 py-1 rounded font-label-caps text-[10px]">Available</span>
+<span class="text-meta text-on-surface-variant">Floor 3, Sci-Fi</span>
+</div>
+</article>
+<!-- Book Card 2 -->
+<article class="bg-surface rounded-lg border border-[#e6dec9] accent-bar p-stack-md card-lift transition-all cursor-pointer flex flex-col h-full">
+<div class="h-48 mb-stack-md rounded bg-surface-container-highest overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A minimalist and academic book cover for a seminal science fiction work about politics and environment. The design features a stylized, top-down view of a planetary surface with complex topographical lines in deep academic navy on a parchment-colored background. A subtle, warm glow suggests a distant sun. The overall look is clean, authoritative, and fitting for a university library setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBspqHOqMRyXUYILbdikkzXqLzHkXWhhoL8ea8k3lH60ISsgm5r0KnxKuQPFCW6Ho7oCJbsDvd-8X8D3D9GJ32ePyOhR0NG7AvS_FoucD_fdC-arhDa-Jhl4CpUkTn_KElTrOdVLozQBtyOTx3zftQAY1cL6MiM_XNBirPzHgnwNv-2Sc6Zd0OOOrZrulb2E2Y18gWkVrlftQnjOXs_DCS_AwIHM3EiAso2cNC81CDYSEmo9BdKoMYC69JdbSIqpWuk5xQLCfEV0uE"/>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-1 text-xl">Red Mars</h3>
+<p class="font-meta text-meta text-on-surface-variant mb-stack-md">Kim Stanley Robinson</p>
+<div class="mt-auto pt-stack-sm border-t border-[#e6dec9] flex justify-between items-center">
+<span class="bg-[#fce8e6] text-[#93000a] px-2 py-1 rounded font-label-caps text-[10px]">Checked Out</span>
+<span class="text-meta text-on-surface-variant">Due Oct 12</span>
+</div>
+</article>
+<!-- Book Card 3 -->
+<article class="bg-surface rounded-lg border border-[#e6dec9] accent-bar p-stack-md card-lift transition-all cursor-pointer flex flex-col h-full">
+<div class="h-48 mb-stack-md rounded bg-surface-container-highest overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A sophisticated book cover illustration depicting a massive, organic-looking spaceship orbiting a vibrant, ecologically diverse planet. The art style is reminiscent of 1970s sci-fi concept art but refined with a contemporary, high-contrast academic aesthetic. Rich crimsons and deep navies contrast against the off-white parchment background, giving it a premium, curated appearance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyzdgoPAmz4k7tQTYtSJh9Qpv64MEzcrY91_IsDHueMuNhzbF1D4eUI5u8VcSBFaQ2j_rr8owqAu-PpMHNjtmnU_mK67ZjNZkU8cNHOM0smS8mFdzGjEeTAxoiA-_apak84tRtAJaTD54ouNbi8SPZ3ujfFj66UzoqUoyqXrH2Inl8p4W_fQZz0g1CBjCAQshtV6TWXFOu8kYHtRLkoGKWiEWk5x3IpG5orNY4pD8wjZMvicTvRcm75M5N1-iPnPztCQcyupVGr30"/>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-1 text-xl">Foundation</h3>
+<p class="font-meta text-meta text-on-surface-variant mb-stack-md">Isaac Asimov</p>
+<div class="mt-auto pt-stack-sm border-t border-[#e6dec9] flex justify-between items-center">
+<span class="bg-[#e2f0d9] text-[#005323] px-2 py-1 rounded font-label-caps text-[10px]">Available</span>
+<span class="text-meta text-on-surface-variant">Floor 3, Sci-Fi</span>
+</div>
+</article>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest text-on-surface-variant font-body-md text-body-md full-width bottom border-t border-outline-variant flat no shadows w-full py-stack-lg px-container-margin flex flex-col md:flex-row justify-between items-center mt-auto">
+<div class="font-label-caps text-label-caps text-primary mb-4 md:mb-0">
+            © 2024 University Library Management System | Intellectual Property Office
+        </div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-meta text-meta text-on-surface-variant hover:text-primary hover:underline decoration-primary transition-opacity duration-300" href="#">Privacy Policy</a>
+<a class="font-meta text-meta text-on-surface-variant hover:text-primary hover:underline decoration-primary transition-opacity duration-300" href="#">Terms of Service</a>
+<a class="font-meta text-meta text-on-surface-variant hover:text-primary hover:underline decoration-primary transition-opacity duration-300" href="#">Library Ethics</a>
+<a class="font-meta text-meta text-on-surface-variant hover:text-primary hover:underline decoration-primary transition-opacity duration-300" href="#">Contact Librarian</a>
+</div>
+</footer>
+<!-- Floating AI Assistant -->
+<button class="fixed bottom-8 right-8 w-16 h-16 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center hover:scale-105 transition-transform hover:bg-primary-container z-50 group">
+<span class="material-symbols-outlined text-3xl group-hover:hidden">forum</span>
+<span class="material-symbols-outlined text-3xl hidden group-hover:block">smart_toy</span>
+</button>
+</body></html>
