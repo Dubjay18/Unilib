@@ -33,7 +33,7 @@ export const LoginScreen: React.FC = () => {
           <span className="inline-block p-3 bg-primary/10 rounded-2xl text-primary mb-3">
             <Sparkle size={44} weight="fill" />
           </span>
-          <h1 className="font-h2 text-3xl text-primary font-bold">UniLibrary</h1>
+          <h1 className="font-h2 text-3xl text-primary font-bold">Campus Shelf</h1>
           <p className="font-body-md text-xs text-on-surface-variant mt-2 font-medium">Academic Portal Access</p>
         </div>
 
@@ -278,7 +278,7 @@ export const LoginScreen: React.FC = () => {
         </div>
 
         <div className="mt-8 text-center text-xs font-mono text-outline dark:text-zinc-500">
-          © 2026 University Library Management System
+          © 2026 Campus Shelf Management System
         </div>
 
       </div>

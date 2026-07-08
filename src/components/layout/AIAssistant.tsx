@@ -93,7 +93,7 @@ export const AIAssistant: React.FC = () => {
                 <Sparkle size={18} weight="fill" className="text-amber-300 animate-pulse" />
                 <div>
                   <h3 className="font-h3 text-sm font-bold text-white leading-none">AI Scholar Assistant</h3>
-                  <span className="text-[10px] text-white/80">UniLibrary Co-Pilot</span>
+                  <span className="text-[10px] text-white/80">Campus Shelf Co-Pilot</span>
                 </div>
               </div>
               <button 

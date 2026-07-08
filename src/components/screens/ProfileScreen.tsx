@@ -27,7 +27,7 @@ export const ProfileScreen: React.FC = () => {
   // Local form editing states
   const [name, setName] = useState(userProfile.name)
   const [email, setEmail] = useState(userProfile.email)
-  const [department, setDepartment] = useState(role === 'student' ? 'Faculty of Computer Science' : 'Library Archives Division')
+  const [department, setDepartment] = useState(role === 'student' ? 'Faculty of Computer Science' : 'Campus Shelf Archives Division')
   const [phone, setPhone] = useState('+234 812 345 6789')
   const [isSaved, setIsSaved] = useState(false)
 
@@ -104,7 +104,7 @@ export const ProfileScreen: React.FC = () => {
         {/* Member ID Code */}
         <div className="border border-border-parchment dark:border-zinc-800 rounded-lg p-3 bg-surface-container-low dark:bg-zinc-950 flex flex-col items-center shrink-0 w-full md:w-auto">
           <IdentificationCard size={24} className="text-primary mb-1" />
-          <span className="text-[9px] text-on-surface-variant uppercase font-bold">Library Card ID</span>
+          <span className="text-[9px] text-on-surface-variant uppercase font-bold">Campus Shelf Card ID</span>
           <span className="font-mono text-xs font-bold text-on-background mt-0.5 tracking-wider">UL-9024823</span>
         </div>
 

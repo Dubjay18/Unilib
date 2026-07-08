@@ -341,7 +341,7 @@ export const LoansFinesScreen: React.FC = () => {
                   <span className="text-[10px] text-on-surface-variant font-semibold block mb-1">
                     Paying Institutional Fine To:
                   </span>
-                  <p className="font-bold text-on-surface mb-2">UniLibrary Registry Office</p>
+                  <p className="font-bold text-on-surface mb-2">Campus Shelf Registry Office</p>
                   <h3 className="font-[Fraunces] text-2xl text-on-surface font-bold">
                     ₦{totalFines.toLocaleString()}
                   </h3>

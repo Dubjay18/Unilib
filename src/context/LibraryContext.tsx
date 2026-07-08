@@ -562,7 +562,7 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   // AI Assistant Chat Messages
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([
-    { id: 'c1', sender: 'ai', text: 'Greetings, scholar. I am the UniLibrary AI research assistant. How may I guide your studies today?', timestamp: new Date() }
+    { id: 'c1', sender: 'ai', text: 'Greetings, scholar. I am the Campus Shelf AI research assistant. How may I guide your studies today?', timestamp: new Date() }
   ])
 
   // Shared statistics derived automatically

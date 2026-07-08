@@ -28,7 +28,7 @@ export const Sidebar: React.FC = () => {
 
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: SquaresFour },
-    { id: 'catalogue', label: 'Library Catalogue', icon: BookOpen },
+    { id: 'catalogue', label: 'Campus Shelf Catalogue', icon: BookOpen },
     { id: 'circulation', label: 'Circulation', icon: ArrowsLeftRight },
     { id: 'analytics', label: 'Analytics', icon: ChartBar },
     { id: 'system-settings', label: 'System Settings', icon: Gear }

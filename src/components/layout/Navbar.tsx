@@ -53,7 +53,7 @@ export const Navbar: React.FC = () => {
               <Sparkle size={24} weight="fill" className="text-primary" />
             </span>
             <span className="font-h2 text-xl md:text-2xl text-primary font-bold tracking-tight">
-              UniLibrary
+              Campus Shelf
             </span>
           </Link>
 

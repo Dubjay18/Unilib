@@ -55,7 +55,7 @@ const LoginScreenWrapper: React.FC = () => {
         <LoginScreen />
       </main>
       <footer className="py-6 border-t border-border-parchment/65 dark:border-zinc-900 text-center text-xs text-on-surface-variant font-medium">
-        UniLibrary Portal Inc. Built with React 19 + Tailwind v4 + Phosphor.
+        Campus Shelf Portal Inc. Built with React 19 + Tailwind v4 + Phosphor.
       </footer>
     </div>
   )
@@ -65,7 +65,7 @@ const LoginScreenWrapper: React.FC = () => {
 const Footer: React.FC = () => (
   <footer className="py-6 border-t border-border-parchment/60 dark:border-zinc-900 bg-surface-container-low/30 dark:bg-zinc-950/20 text-center text-xs text-on-surface-variant font-medium">
     <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-      <p>© 2026 University Library Management System | Intellectual Property Office</p>
+      <p>© 2026 Campus Shelf Management System | Intellectual Property Office</p>
       <div className="flex gap-4">
         <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
         <a href="#" className="hover:text-primary transition-colors">Terms</a>

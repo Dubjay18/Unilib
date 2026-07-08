@@ -32,7 +32,7 @@ export const AdminAnalyticsScreen: React.FC = () => {
         <div>
           <h1 className="font-h1 text-h1-mobile md:text-h1 text-primary mb-1">System Analytics</h1>
           <p className="font-body-lg text-xs md:text-sm text-on-surface-variant">
-            Overview of library metrics, circulation trends, and department usage.
+            Overview of Campus Shelf metrics, circulation trends, and department usage.
           </p>
         </div>
 
