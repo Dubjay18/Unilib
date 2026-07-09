@@ -137,8 +137,8 @@ export const LoginScreen: React.FC = () => {
   }
 
   return (
-    <div className="min-h-[85vh] flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-[85vh] flex items-center md:w-[50%] justify-center p-4">
+      <div className="w-full max-w-2xl">
         
         {/* Portal Header */}
         <div className="text-center mb-8">
