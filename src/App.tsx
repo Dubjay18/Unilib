@@ -17,6 +17,7 @@ import { StaffPortalScreen } from '@/components/screens/StaffPortalScreen'
 import { AdminAnalyticsScreen } from '@/components/screens/AdminAnalyticsScreen'
 import { ProfileScreen } from '@/components/screens/ProfileScreen'
 import { CirculationScreen } from '@/components/screens/CirculationScreen'
+import { LandingPageScreen } from '@/components/screens/LandingPageScreen'
 
 import { 
   Gear, 
@@ -186,12 +187,15 @@ export default function App() {
       <ToastList />
       <BrowserRouter>
         <Routes>
+          {/* Public Landing Page */}
+          <Route path="/" element={<LandingPageScreen />} />
+
           {/* Unauthenticated Login Portal */}
           <Route path="/login" element={<LoginScreenWrapper />} />
 
           {/* Student Layout Routes */}
           <Route element={<ProtectedRoute allowedRole="student"><StudentLayout /></ProtectedRoute>}>
-            <Route path="/" element={<Navigate to="/catalogue" replace />} />
+
             <Route path="/catalogue" element={<BrowseCatalogScreen />} />
             <Route path="/my-books" element={<LoansFinesScreen />} />
             <Route path="/research" element={<DigitalResourcesScreen />} />
