@@ -5,6 +5,7 @@ import { Navbar } from '@/components/layout/Navbar'
 import { Sidebar } from '@/components/layout/Sidebar'
 import { AIAssistant } from '@/components/layout/AIAssistant'
 import { NewBookModal } from '@/components/layout/NewBookModal'
+import { ToastList } from '@/components/ui/ToastList'
 
 // Screens
 import { LoginScreen } from '@/components/screens/LoginScreen'
@@ -15,6 +16,7 @@ import { DigitalResourcesScreen } from '@/components/screens/DigitalResourcesScr
 import { StaffPortalScreen } from '@/components/screens/StaffPortalScreen'
 import { AdminAnalyticsScreen } from '@/components/screens/AdminAnalyticsScreen'
 import { ProfileScreen } from '@/components/screens/ProfileScreen'
+import { CirculationScreen } from '@/components/screens/CirculationScreen'
 
 import { 
   Gear, 
@@ -181,6 +183,7 @@ const SystemSettingsView: React.FC = () => {
 export default function App() {
   return (
     <LibraryProvider>
+      <ToastList />
       <BrowserRouter>
         <Routes>
           {/* Unauthenticated Login Portal */}
@@ -201,7 +204,7 @@ export default function App() {
             <Route path="/staff" element={<Navigate to="/staff/dashboard" replace />} />
             <Route path="/staff/dashboard" element={<StaffPortalScreen />} />
             <Route path="/staff/catalogue" element={<BrowseCatalogScreen />} />
-            <Route path="/staff/circulation" element={<StaffPortalScreen />} />
+            <Route path="/staff/circulation" element={<CirculationScreen />} />
             <Route path="/staff/analytics" element={<AdminAnalyticsScreen />} />
             <Route path="/staff/system-settings" element={<SystemSettingsView />} />
             <Route path="/staff/profile" element={<ProfileScreen />} />

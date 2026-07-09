@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useLibrary } from '@/context/LibraryContext'
 import { 
   FilePdf, 
@@ -27,7 +27,12 @@ export const DigitalResourcesScreen: React.FC = () => {
     deleteResource,
     toggleResourceVisibility,
     isUploadModalOpen,
-    setIsUploadModalOpen
+    setIsUploadModalOpen,
+    isUploadingResource,
+    isDeletingResource,
+    deletingResourceId,
+    isTogglingResourceVisibility,
+    togglingResourceId
   } = useLibrary()
 
   // Filter & Search states
@@ -45,6 +50,8 @@ export const DigitalResourcesScreen: React.FC = () => {
   const [fileFormat, setFileFormat] = useState<'PDF' | 'EPUB'>('PDF')
   const [mockDragActive, setMockDragActive] = useState(false)
   const [uploadedFile, setUploadedFile] = useState<{ name: string; size: string } | null>(null)
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleAddTag = () => {
     if (tagInput.trim() && !newTags.includes(tagInput.trim())) {
@@ -68,21 +75,33 @@ export const DigitalResourcesScreen: React.FC = () => {
     if (!newTitle) return
     
     const size = uploadedFile ? uploadedFile.size : '4.2 MB'
-    uploadResource(newTitle, newAuthor, newTags, isPublic, fileFormat, size)
+    uploadResource(newTitle, newAuthor, newTags, isPublic, fileFormat, size, selectedFile || undefined)
 
     // Reset Form
     setNewTitle('')
     setNewAuthor('')
     setNewTags([])
     setUploadedFile(null)
+    setSelectedFile(null)
   }
 
-  // Handle mock file selection
-  const triggerMockFileSelect = () => {
-    setUploadedFile({
-      name: `${newTitle || 'research_paper'}_draft.${fileFormat.toLowerCase()}`,
-      size: `${(Math.random() * 15 + 2).toFixed(1)} MB`
-    })
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      setSelectedFile(file)
+      setUploadedFile({
+        name: file.name,
+        size: file.size > 1024 * 1024 
+          ? `${(file.size / (1024 * 1024)).toFixed(1)} MB`
+          : `${(file.size / 1024).toFixed(0)} KB`
+      })
+    }
+  }
+
+  const triggerFileSelect = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click()
+    }
   }
 
   const collections = [
@@ -304,17 +323,29 @@ export const DigitalResourcesScreen: React.FC = () => {
                     <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity bg-white/95 dark:bg-zinc-900/95 backdrop-blur-sm rounded-lg shadow-md border border-border-parchment dark:border-zinc-800 p-1 flex gap-1 z-10 translate-y-[-5px] group-hover:translate-y-0 duration-200">
                       <button
                         onClick={() => toggleResourceVisibility(res.id)}
-                        className="p-1 text-on-surface-variant hover:text-primary rounded hover:bg-surface-container dark:hover:bg-zinc-800"
+                        disabled={isTogglingResourceVisibility || isDeletingResource}
+                        className="p-1 text-on-surface-variant hover:text-primary rounded hover:bg-surface-container dark:hover:bg-zinc-800 disabled:opacity-50 flex items-center justify-center min-w-[22px] min-h-[22px]"
                         title={res.isPublic ? "Make resource Private" : "Make resource Public"}
                       >
-                        {res.isPublic ? <EyeSlash size={14} /> : <Eye size={14} />}
+                        {isTogglingResourceVisibility && togglingResourceId === res.id ? (
+                          <span className="h-3.5 w-3.5 border-2 border-primary/30 border-t-primary rounded-full animate-spin"></span>
+                        ) : res.isPublic ? (
+                          <EyeSlash size={14} />
+                        ) : (
+                          <Eye size={14} />
+                        )}
                       </button>
                       <button
                         onClick={() => deleteResource(res.id)}
-                        className="p-1 text-on-surface-variant hover:text-error rounded hover:bg-rose-50 dark:hover:bg-rose-950/20"
+                        disabled={isTogglingResourceVisibility || isDeletingResource}
+                        className="p-1 text-on-surface-variant hover:text-error rounded hover:bg-rose-50 dark:hover:bg-rose-950/20 disabled:opacity-50 flex items-center justify-center min-w-[22px] min-h-[22px]"
                         title="Delete digital record"
                       >
-                        <Trash size={14} />
+                        {isDeletingResource && deletingResourceId === res.id ? (
+                          <span className="h-3.5 w-3.5 border-2 border-rose-500/30 border-t-rose-500 rounded-full animate-spin"></span>
+                        ) : (
+                          <Trash size={14} />
+                        )}
                       </button>
                     </div>
                   )}
@@ -378,10 +409,23 @@ export const DigitalResourcesScreen: React.FC = () => {
                 
                 {/* Drag and Drop Zone */}
                 <div 
-                  onClick={triggerMockFileSelect}
+                  onClick={triggerFileSelect}
                   onDragOver={(e) => { e.preventDefault(); setMockDragActive(true); }}
                   onDragLeave={() => setMockDragActive(false)}
-                  onDrop={(e) => { e.preventDefault(); setMockDragActive(false); triggerMockFileSelect(); }}
+                  onDrop={(e) => { 
+                    e.preventDefault(); 
+                    setMockDragActive(false); 
+                    const file = e.dataTransfer.files?.[0];
+                    if (file) {
+                      setSelectedFile(file);
+                      setUploadedFile({
+                        name: file.name,
+                        size: file.size > 1024 * 1024 
+                          ? `${(file.size / (1024 * 1024)).toFixed(1)} MB`
+                          : `${(file.size / 1024).toFixed(0)} KB`
+                      });
+                    }
+                  }}
                   className={`border-2 border-dashed rounded-xl p-6 flex flex-col items-center justify-center text-center cursor-pointer transition-all ${
                     mockDragActive 
                       ? 'border-primary bg-primary/5' 
@@ -390,6 +434,13 @@ export const DigitalResourcesScreen: React.FC = () => {
                       : 'border-outline-variant hover:bg-surface-container-low dark:hover:bg-zinc-950/40'
                   }`}
                 >
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleFileChange}
+                    className="hidden"
+                    accept=".pdf,.epub"
+                  />
                   <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-3 ${
                     uploadedFile ? 'bg-emerald-100 text-emerald-600' : 'bg-primary/10 text-primary'
                   }`}>
@@ -553,10 +604,20 @@ export const DigitalResourcesScreen: React.FC = () => {
                   </button>
                   <button
                     type="submit"
-                    className="px-5 py-2 bg-primary text-on-primary hover:bg-primary-container font-bold rounded-lg transition-colors flex items-center gap-1.5 text-[10px] uppercase tracking-wider shadow-md"
+                    disabled={isUploadingResource}
+                    className="px-5 py-2 bg-primary text-on-primary hover:bg-primary-container disabled:opacity-75 font-bold rounded-lg transition-colors flex items-center gap-1.5 text-[10px] uppercase tracking-wider shadow-md"
                   >
-                    <CheckCircle size={14} weight="bold" />
-                    <span>Upload &amp; Save</span>
+                    {isUploadingResource ? (
+                      <>
+                        <span className="h-3.5 w-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                        <span>Saving...</span>
+                      </>
+                    ) : (
+                      <>
+                        <CheckCircle size={14} weight="bold" />
+                        <span>Upload &amp; Save</span>
+                      </>
+                    )}
                   </button>
                 </div>
 

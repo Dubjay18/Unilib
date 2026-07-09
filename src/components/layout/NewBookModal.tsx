@@ -4,7 +4,7 @@ import { X, Sparkle, Barcode, MapPin, Calendar, FileText } from '@phosphor-icons
 import { motion, AnimatePresence } from 'framer-motion'
 
 export const NewBookModal: React.FC = () => {
-  const { isNewBookModalOpen, setIsNewBookModalOpen, addCatalogueBook } = useLibrary()
+  const { isNewBookModalOpen, setIsNewBookModalOpen, addCatalogueBook, isAddingCatalogueBook } = useLibrary()
 
   const [title, setTitle] = useState('')
   const [subtitle, setSubtitle] = useState('')
@@ -258,16 +258,24 @@ export const NewBookModal: React.FC = () => {
                 <button 
                   type="button"
                   onClick={() => setIsNewBookModalOpen(false)}
-                  className="px-4 py-2 border border-border-parchment dark:border-zinc-800 rounded-lg font-bold text-[10px] uppercase hover:bg-surface-container dark:hover:bg-zinc-850 transition-colors"
+                  disabled={isAddingCatalogueBook}
+                  className="px-4 py-2 border border-border-parchment dark:border-zinc-800 rounded-lg font-bold text-[10px] uppercase hover:bg-surface-container dark:hover:bg-zinc-850 disabled:opacity-50 transition-colors"
                 >
                   Cancel
                 </button>
                 <button 
                   type="submit"
-                  disabled={!title || !author}
-                  className="bg-primary hover:bg-primary-container disabled:opacity-50 text-on-primary font-bold text-[10px] uppercase px-5 py-2 rounded-lg transition-colors shadow-sm"
+                  disabled={!title || !author || isAddingCatalogueBook}
+                  className="bg-primary hover:bg-primary-container disabled:opacity-50 text-on-primary font-bold text-[10px] uppercase px-5 py-2 rounded-lg transition-colors shadow-sm flex items-center gap-1.5"
                 >
-                  Save & Index Book
+                  {isAddingCatalogueBook ? (
+                    <>
+                      <span className="h-3 w-3 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                      <span>Saving...</span>
+                    </>
+                  ) : (
+                    <span>Save & Index Book</span>
+                  )}
                 </button>
               </div>
 

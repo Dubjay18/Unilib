@@ -10,7 +10,8 @@ export const AIAssistant: React.FC = () => {
     isAIAssistantOpen,
     setIsAIAssistantOpen,
     chatHistory,
-    sendChatMessage
+    sendChatMessage,
+    isChatLoading
   } = useLibrary()
 
   const [inputText, setInputText] = useState('')
@@ -21,7 +22,7 @@ export const AIAssistant: React.FC = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
     }
-  }, [chatHistory, isAIAssistantOpen])
+  }, [chatHistory, isAIAssistantOpen, isChatLoading])
 
   if (!isLoggedIn) {
     return null
@@ -127,6 +128,15 @@ export const AIAssistant: React.FC = () => {
                   </div>
                 </div>
               ))}
+              {isChatLoading && (
+                <div className="flex justify-start">
+                  <div className="bg-white dark:bg-zinc-800 text-on-surface border border-border-parchment dark:border-zinc-800 rounded-2xl rounded-tl-none px-3.5 py-2.5 text-xs shadow-sm flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 bg-primary/70 dark:bg-primary-fixed-dim/70 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <span className="w-1.5 h-1.5 bg-primary/70 dark:bg-primary-fixed-dim/70 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <span className="w-1.5 h-1.5 bg-primary/70 dark:bg-primary-fixed-dim/70 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Suggestions Chips Bar */}
@@ -135,7 +145,8 @@ export const AIAssistant: React.FC = () => {
                 <button
                   key={idx}
                   onClick={() => sendChatMessage(text)}
-                  className="bg-white dark:bg-zinc-900 border border-border-parchment dark:border-zinc-800 hover:border-primary dark:hover:border-primary-fixed-dim rounded-full px-3 py-1 text-[10px] font-semibold text-on-surface-variant hover:text-primary transition-all shadow-sm"
+                  disabled={isChatLoading}
+                  className="bg-white dark:bg-zinc-900 border border-border-parchment dark:border-zinc-800 hover:border-primary dark:hover:border-primary-fixed-dim rounded-full px-3 py-1 text-[10px] font-semibold text-on-surface-variant hover:text-primary transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {text}
                 </button>
@@ -147,15 +158,17 @@ export const AIAssistant: React.FC = () => {
               <input
                 type="text"
                 value={inputText}
+                disabled={isChatLoading}
                 onChange={e => setInputText(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Ask about catalogue findings, renewals, fines..."
-                className="flex-grow bg-surface-container-low dark:bg-zinc-950/60 border border-border-parchment dark:border-zinc-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-primary dark:focus:ring-primary-fixed-dim text-on-surface"
+                placeholder={isChatLoading ? "AI Scholar is thinking..." : "Ask about catalogue findings, renewals, fines..."}
+                className="flex-grow bg-surface-container-low dark:bg-zinc-950/60 border border-border-parchment dark:border-zinc-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-primary dark:focus:ring-primary-fixed-dim text-on-surface disabled:opacity-50"
               />
               <Button
                 size="icon"
                 onClick={handleSend}
-                className="h-8 w-8 rounded-xl bg-primary hover:bg-primary-container text-on-primary shrink-0"
+                disabled={isChatLoading || !inputText.trim()}
+                className="h-8 w-8 rounded-xl bg-primary hover:bg-primary-container text-on-primary shrink-0 disabled:opacity-50"
               >
                 <PaperPlaneRight size={16} weight="fill" />
               </Button>

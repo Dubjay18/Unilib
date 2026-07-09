@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLibrary } from '@/context/LibraryContext'
 import { 
   User, 
@@ -12,8 +12,11 @@ import {
   Coins,
   Clock,
   CheckCircle,
-  FloppyDisk
+  FloppyDisk,
+  Key
 } from '@phosphor-icons/react'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { userApi, authApi } from '@/lib/api'
 
 export const ProfileScreen: React.FC = () => {
   const { 
@@ -21,24 +24,76 @@ export const ProfileScreen: React.FC = () => {
     role, 
     loans, 
     totalFines, 
-    loanHistory 
+    loanHistory,
+    showToast
   } = useLibrary()
+
+  const queryClient = useQueryClient()
 
   // Local form editing states
   const [name, setName] = useState(userProfile.name)
   const [email, setEmail] = useState(userProfile.email)
-  const [department, setDepartment] = useState(role === 'student' ? 'Faculty of Computer Science' : 'Campus Shelf Archives Division')
-  const [phone, setPhone] = useState('+234 812 345 6789')
+  const [department, setDepartment] = useState(role === 'student' ? 'Computer Science' : 'Campus Shelf Archives Division')
+  const [phone, setPhone] = useState('')
   const [isSaved, setIsSaved] = useState(false)
+
+  // Security change password states
+  const [currentPassword, setCurrentPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+  const [passwordMessage, setPasswordMessage] = useState('')
+  const [passwordLoading, setPasswordLoading] = useState(false)
 
   // Preferences toggles
   const [notifyRenewal, setNotifyRenewal] = useState(true)
   const [enableAI, setEnableAI] = useState(true)
 
+  // Synchronize input fields when async user profile loads
+  useEffect(() => {
+    setName(userProfile.name)
+    setEmail(userProfile.email)
+  }, [userProfile.name, userProfile.email])
+
+  const updateProfileMutation = useMutation({
+    mutationFn: (data: { firstName: string; lastName: string; phoneNumber?: string }) =>
+      userApi.updateMe(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['userMe'] })
+      setIsSaved(true)
+      setTimeout(() => setIsSaved(false), 3000)
+      showToast('Profile updated successfully!', 'success')
+    },
+    onError: (err: any) => {
+      showToast(err.response?.data?.message || err.message || 'Profile update failed.', 'error')
+    }
+  })
+
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSaved(true)
-    setTimeout(() => setIsSaved(false), 3000)
+    const nameParts = name.trim().split(/\s+/)
+    const firstName = nameParts[0] || ''
+    const lastName = nameParts.slice(1).join(' ') || ''
+    updateProfileMutation.mutate({
+      firstName,
+      lastName,
+      phoneNumber: phone || undefined
+    })
+  }
+
+  const handlePasswordChange = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setPasswordMessage('')
+    setPasswordLoading(true)
+    try {
+      const res = await authApi.changePassword({ currentPassword, newPassword })
+      setPasswordMessage(res.message || 'Password changed successfully.')
+      setCurrentPassword('')
+      setNewPassword('')
+    } catch (err: any) {
+      console.error(err)
+      setPasswordMessage(err.response?.data?.message || 'Password update failed. Confirm current password.')
+    } finally {
+      setPasswordLoading(false)
+    }
   }
 
   // Derive stats dynamically
@@ -206,10 +261,20 @@ export const ProfileScreen: React.FC = () => {
               ) : <div />}
               <button 
                 type="submit"
-                className="bg-primary hover:bg-primary-container text-on-primary font-bold text-[10px] uppercase px-4 py-2 rounded-lg transition-colors shadow-sm flex items-center gap-1"
+                disabled={updateProfileMutation.isPending}
+                className="bg-primary hover:bg-primary-container disabled:opacity-75 text-on-primary font-bold text-[10px] uppercase px-4 py-2 rounded-lg transition-colors shadow-sm flex items-center gap-1.5"
               >
-                <FloppyDisk size={14} />
-                <span>Save Changes</span>
+                {updateProfileMutation.isPending ? (
+                  <>
+                    <span className="h-3 w-3 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                    <span>Saving...</span>
+                  </>
+                ) : (
+                  <>
+                    <FloppyDisk size={14} />
+                    <span>Save Changes</span>
+                  </>
+                )}
               </button>
             </div>
           </form>
@@ -249,6 +314,51 @@ export const ProfileScreen: React.FC = () => {
               </div>
             </label>
           </div>
+        </div>
+
+        {/* Security / Password Change Card */}
+        <div className="bg-white dark:bg-zinc-900 border border-border-parchment dark:border-zinc-800 rounded-xl p-6 shadow-sm space-y-4">
+          <h3 className="font-h3 text-sm font-bold text-on-background flex items-center gap-1.5 border-b border-zinc-100 dark:border-zinc-850 pb-2.5">
+            <Key size={18} />
+            <span>Security &amp; Password</span>
+          </h3>
+
+          <form onSubmit={handlePasswordChange} className="space-y-3 text-xs font-semibold text-on-surface-variant">
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase font-bold text-on-surface">Current Password</label>
+              <input 
+                type="password"
+                required
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                placeholder="••••••••"
+                className="w-full bg-white dark:bg-zinc-950 border border-border-parchment dark:border-zinc-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-primary text-on-surface"
+              />
+            </div>
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase font-bold text-on-surface">New Secure Password</label>
+              <input 
+                type="password"
+                required
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                placeholder="••••••••"
+                className="w-full bg-white dark:bg-zinc-950 border border-border-parchment dark:border-zinc-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-primary text-on-surface"
+              />
+            </div>
+            {passwordMessage && (
+              <p className={`text-[10px] font-bold ${passwordMessage.includes('successfully') ? 'text-emerald-600' : 'text-rose-600'}`}>
+                {passwordMessage}
+              </p>
+            )}
+            <button 
+              type="submit"
+              disabled={passwordLoading}
+              className="w-full bg-surface-container dark:bg-zinc-800 hover:bg-surface-container-high dark:hover:bg-zinc-700 text-on-surface font-bold text-[10px] uppercase py-2 rounded-lg border border-border-parchment dark:border-zinc-700 transition-all flex items-center justify-center gap-1.5"
+            >
+              {passwordLoading ? 'Updating Password...' : 'Update Password Credentials'}
+            </button>
+          </form>
         </div>
 
       </div>

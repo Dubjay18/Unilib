@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useLibrary } from '@/context/LibraryContext'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
+import { healthApi } from '@/lib/api'
 import { 
   Bell, 
   Question, 
@@ -8,7 +10,6 @@ import {
   Moon, 
   CaretDown, 
   Sparkle, 
-  UserGear, 
   SignOut,
   GraduationCap,
   ShieldCheck,
@@ -31,7 +32,6 @@ export const Navbar: React.FC = () => {
   const {
     isLoggedIn,
     role,
-    setRole,
     theme,
     toggleTheme,
     userProfile,
@@ -41,6 +41,14 @@ export const Navbar: React.FC = () => {
   } = useLibrary()
 
   const [isNotifOpen, setIsNotifOpen] = useState(false)
+
+  // Query: API Health status
+  const { data: healthData } = useQuery({
+    queryKey: ['apiHealth'],
+    queryFn: () => healthApi.check().catch(() => ({ status: 'offline' })),
+    refetchInterval: 30000,
+    retry: false
+  })
 
   return (
     <header className="bg-background border-b border-border-parchment dark:border-zinc-800 w-full z-40 sticky top-0 transition-colors duration-300">
@@ -52,8 +60,14 @@ export const Navbar: React.FC = () => {
             <span className="p-2 bg-primary/10 dark:bg-primary/20 rounded-xl text-primary flex items-center justify-center">
               <Sparkle size={24} weight="fill" className="text-primary" />
             </span>
-            <span className="font-h2 text-xl md:text-2xl text-primary font-bold tracking-tight">
+            <span className="font-h2 text-xl md:text-2xl text-primary font-bold tracking-tight relative">
               Campus Shelf
+              <span 
+                className={`absolute -top-1 -right-2.5 w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                  healthData && 'status' in healthData && healthData.status === 'healthy' ? 'bg-emerald-500' : 'bg-rose-500 animate-pulse'
+                }`}
+                title={healthData && 'status' in healthData && healthData.status === 'healthy' ? 'Campus Shelf API is online' : 'Campus Shelf API is offline'}
+              />
             </span>
           </Link>
 
@@ -107,19 +121,11 @@ export const Navbar: React.FC = () => {
         {/* Right Side: Tools & Actions */}
         <div className="flex items-center gap-3">
           
-          {/* Quick Developer Switcher Widget (approved in plan) */}
+          {/* Current Role Badge */}
           {isLoggedIn && (
             <div className="flex items-center gap-1.5 px-3 py-1 bg-primary/5 border border-primary/20 rounded-full text-xs font-semibold text-primary dark:text-primary-fixed-dim">
               <span className="hidden sm:inline">Role:</span>
-              <button 
-                onClick={() => {
-                  const newRole = role === 'student' ? 'staff' : 'student';
-                  setRole(newRole);
-                  navigate(newRole === 'student' ? '/catalogue' : '/staff/dashboard');
-                }}
-                className="flex items-center gap-1 hover:underline text-primary"
-                title="Click to toggle between Student and Staff layouts"
-              >
+              <span className="flex items-center gap-1 text-primary">
                 {role === 'student' ? (
                   <>
                     <GraduationCap size={16} weight="fill" />
@@ -131,7 +137,7 @@ export const Navbar: React.FC = () => {
                     <span>Staff Portal</span>
                   </>
                 )}
-              </button>
+              </span>
             </div>
           )}
 
@@ -235,17 +241,6 @@ export const Navbar: React.FC = () => {
                 >
                   <User size={16} />
                   <span>My Profile</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem 
-                  onClick={() => {
-                    const newRole = role === 'student' ? 'staff' : 'student';
-                    setRole(newRole);
-                    navigate(newRole === 'student' ? '/catalogue' : '/staff/dashboard');
-                  }}
-                  className="cursor-pointer hover:bg-surface-container dark:hover:bg-zinc-800 px-3 py-2 text-xs text-on-surface flex items-center gap-2 rounded-lg"
-                >
-                  <UserGear size={16} />
-                  <span>Switch to {role === 'student' ? 'Staff' : 'Student'}</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem 
                   onClick={() => navigate('/support')}
