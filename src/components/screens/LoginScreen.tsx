@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useLibrary } from '@/context/LibraryContext'
 import type { UserRole } from '@/context/LibraryContext'
-import { ArrowLeft, Sparkle, Key, Envelope } from '@phosphor-icons/react'
+import { ArrowLeft, BookOpen, Key, Envelope } from '@phosphor-icons/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
@@ -143,9 +143,9 @@ export const LoginScreen: React.FC = () => {
         {/* Portal Header */}
         <div className="text-center mb-8">
           <span className="inline-block p-3 bg-primary/10 rounded-2xl text-primary mb-3">
-            <Sparkle size={44} weight="fill" />
+            <BookOpen size={44} weight="fill" />
           </span>
-          <h1 className="font-h2 text-3xl text-primary font-bold">Campus Shelf</h1>
+          <h1 className="font-h2 text-3xl text-primary font-bold">CampusShelf</h1>
           <p className="font-body-md text-xs text-on-surface-variant mt-2 font-medium">Academic Portal Access</p>
         </div>
 
@@ -188,7 +188,7 @@ export const LoginScreen: React.FC = () => {
                         Institutional Email
                       </label>
                       <div className="relative">
-                        <Envelope size={16} className="absolute left-3 top-3 text-on-surface-variant" />
+                        <Envelope size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" />
                         <input
                           className="form-input-custom pl-10"
                           id="login-email"
@@ -203,24 +203,11 @@ export const LoginScreen: React.FC = () => {
                     </div>
 
                     <div>
-                      <div className="flex justify-between items-center mb-1.5">
-                        <label className="block font-meta text-xs text-on-surface-variant font-semibold" htmlFor="login-password">
-                          Password
-                        </label>
-                        <button 
-                          type="button"
-                          className="font-meta text-xs text-primary hover:underline font-semibold bg-transparent border-none"
-                          onClick={() => {
-                            setErrorMessage('')
-                            setInfoMessage('')
-                            setAuthMode('forgot')
-                          }}
-                        >
-                          Forgot Password?
-                        </button>
-                      </div>
+                      <label className="block font-meta text-xs text-on-surface-variant mb-1.5 font-semibold" htmlFor="login-password">
+                        Password
+                      </label>
                       <div className="relative">
-                        <Key size={16} className="absolute left-3 top-3 text-on-surface-variant" />
+                        <Key size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" />
                         <input
                           className="form-input-custom pl-10"
                           id="login-password"
@@ -232,6 +219,17 @@ export const LoginScreen: React.FC = () => {
                           disabled={loading}
                         />
                       </div>
+                      <button 
+                        type="button"
+                        className="font-meta text-xs text-primary hover:underline font-semibold bg-transparent border-none mt-2"
+                        onClick={() => {
+                          setErrorMessage('')
+                          setInfoMessage('')
+                          setAuthMode('forgot')
+                        }}
+                      >
+                        Forgot Password?
+                      </button>
                     </div>
 
                     <button
@@ -409,7 +407,7 @@ export const LoginScreen: React.FC = () => {
                         Institutional Email
                       </label>
                       <div className="relative">
-                        <Envelope size={16} className="absolute left-3 top-3 text-on-surface-variant" />
+                        <Envelope size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" />
                         <input
                           className="form-input-custom pl-10"
                           id="forgot-email"

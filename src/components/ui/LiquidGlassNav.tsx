@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Sparkle } from '@phosphor-icons/react'
+import { BookOpen } from '@phosphor-icons/react'
 
 export const LiquidGlassNav: React.FC = () => {
   return (
@@ -15,10 +15,10 @@ export const LiquidGlassNav: React.FC = () => {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group outline-none">
           <div className="w-8 h-8 rounded-xl bg-primary/10 dark:bg-primary/20 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors">
-            <Sparkle size={18} weight="fill" />
+            <BookOpen size={18} weight="fill" />
           </div>
           <span className="font-bold text-base tracking-tight text-primary font-h2">
-            Campus Shelf
+            CampusShelf
           </span>
         </Link>
 

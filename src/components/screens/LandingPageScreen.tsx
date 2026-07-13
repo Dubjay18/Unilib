@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Sparkle } from '@phosphor-icons/react'
+import { BookOpen } from '@phosphor-icons/react'
 
 export const LandingPageScreen: React.FC = () => {
   return (
@@ -456,9 +456,9 @@ export const LandingPageScreen: React.FC = () => {
           <div className="landing-container nav-bar">
             <Link to="/" className="brand" aria-label="CampusShelf Home">
               <div style={{ width: '32px', height: '32px', borderRadius: '10px', background: 'rgba(122, 28, 28, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-primary)' }}>
-                <Sparkle size={20} weight="fill" />
+                <BookOpen size={20} weight="fill" />
               </div>
-              <span>Campus Shelf</span>
+              <span>CampusShelf</span>
             </Link>
             
             <ul className="nav-links">
@@ -480,7 +480,6 @@ export const LandingPageScreen: React.FC = () => {
                 <p>CampusShelf brings physical book catalogs, real-time tracking, student borrow queues, and cloud research journals into one singular unified platform.</p>
                 <div className="hero-btns">
                   <a href="#features" className="btn btn-primary">Explore Workflows</a>
-                  <Link to="/login" className="btn btn-outline">Go to Portal</Link>
                 </div>
               </div>
 
@@ -709,9 +708,9 @@ Authorization: Bearer <jwt_handshake_token>
 
         <footer className="site-footer">
           <div className="landing-container">
-            <p style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: 'var(--color-text-dark)', marginBottom: '8px', fontWeight: '700' }}>Campus Shelf</p>
+            <p style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: 'var(--color-text-dark)', marginBottom: '8px', fontWeight: '700' }}>CampusShelf</p>
             <p>
-              &copy; 2026 Campus Shelf Core Framework Platform. All library metadata processing complies with strict institutional security access protocols. <a href="https://github.com/Dubjay18" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-primary)', textDecoration: 'underline' }}>@jay</a>
+              &copy; 2026 CampusShelf Core Framework Platform. All library metadata processing complies with strict institutional security access protocols. <a href="https://github.com/Dubjay18" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-primary)', textDecoration: 'underline' }}>@jay</a>
             </p>
           </div>
         </footer>

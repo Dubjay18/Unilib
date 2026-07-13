@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useLibrary } from '@/context/LibraryContext'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { healthApi } from '@/lib/api'
 import { 
@@ -9,7 +9,7 @@ import {
   Sun, 
   Moon, 
   CaretDown, 
-  Sparkle, 
+  BookOpen, 
   SignOut,
   GraduationCap,
   ShieldCheck,
@@ -29,6 +29,7 @@ import {
 
 export const Navbar: React.FC = () => {
   const navigate = useNavigate()
+  const location = useLocation()
   const {
     isLoggedIn,
     role,
@@ -58,15 +59,15 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center gap-4">
           <Link to={role === 'student' ? '/catalogue' : '/staff/dashboard'} className="flex items-center gap-2 cursor-pointer">
             <span className="p-2 bg-primary/10 dark:bg-primary/20 rounded-xl text-primary flex items-center justify-center">
-              <Sparkle size={24} weight="fill" className="text-primary" />
+              <BookOpen size={24} weight="fill" className="text-primary" />
             </span>
             <span className="font-h2 text-xl md:text-2xl text-primary font-bold tracking-tight relative">
-              Campus Shelf
+              CampusShelf
               <span 
                 className={`absolute -top-1 -right-2.5 w-1.5 h-1.5 rounded-full transition-all duration-300 ${
                   healthData && 'status' in healthData && healthData.status === 'healthy' ? 'bg-emerald-500' : 'bg-rose-500 animate-pulse'
                 }`}
-                title={healthData && 'status' in healthData && healthData.status === 'healthy' ? 'Campus Shelf API is online' : 'Campus Shelf API is offline'}
+                title={healthData && 'status' in healthData && healthData.status === 'healthy' ? 'CampusShelf API is online' : 'CampusShelf API is offline'}
               />
             </span>
           </Link>
@@ -198,14 +199,16 @@ export const Navbar: React.FC = () => {
           )}
 
           {/* Help Button */}
-          <Button
-            variant="outline"
-            size="icon"
-            className="h-10 w-10 rounded-xl border-border-parchment dark:border-zinc-800 bg-background dark:bg-zinc-900 text-on-surface-variant hover:bg-surface-container hover:text-primary shadow-sm hidden sm:flex"
-            onClick={() => navigate('/support')}
-          >
-            <Question size={20} />
-          </Button>
+          {location.pathname !== '/login' && (
+            <Button
+              variant="outline"
+              size="icon"
+              className="h-10 w-10 rounded-xl border-border-parchment dark:border-zinc-800 bg-background dark:bg-zinc-900 text-on-surface-variant hover:bg-surface-container hover:text-primary shadow-sm hidden sm:flex"
+              onClick={() => navigate('/support')}
+            >
+              <Question size={20} />
+            </Button>
+          )}
 
           {/* User Profile Dropdown */}
           {isLoggedIn ? (
@@ -263,12 +266,14 @@ export const Navbar: React.FC = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button
-              onClick={() => navigate('/login')}
-              className="bg-primary hover:bg-primary-container text-on-primary rounded-xl px-4 text-xs font-semibold shadow-sm"
-            >
-              Sign In
-            </Button>
+            location.pathname !== '/login' && (
+              <Button
+                onClick={() => navigate('/login')}
+                className="bg-primary hover:bg-primary-container text-on-primary rounded-xl px-4 text-xs font-semibold shadow-sm"
+              >
+                Sign In
+              </Button>
+            )
           )}
 
         </div>

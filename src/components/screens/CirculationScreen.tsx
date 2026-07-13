@@ -81,7 +81,7 @@ export const CirculationScreen: React.FC = () => {
         
         {/* Search */}
         <div className="relative w-full md:w-80">
-          <MagnifyingGlass size={16} className="absolute left-3 top-3 text-on-surface-variant" />
+          <MagnifyingGlass size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" />
           <input
             type="text"
             placeholder="Search by book title or borrower name..."

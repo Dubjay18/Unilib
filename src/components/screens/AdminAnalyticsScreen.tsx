@@ -14,6 +14,19 @@ export const AdminAnalyticsScreen: React.FC = () => {
   const { analyticsMetrics } = useLibrary()
   const [hoveredBarIndex, setHoveredBarIndex] = useState<number | null>(null)
 
+  const handleExportCSV = () => {
+    const headers = ['Rank', 'Title', 'Author', 'Department', 'Loans (YTD)', 'Status']
+    const rows = topBooks.map(b => [b.rank, b.title, b.author, b.dept, b.loans, b.status])
+    const csv = [headers, ...rows].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n')
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = 'campusshelf_most_borrowed.csv'
+    link.click()
+    URL.revokeObjectURL(url)
+  }
+
   const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
   const dailyLoans = [400, 600, 850, 500, 700, 900, 650] // Mock data mapped to chart heights
 
@@ -30,7 +43,7 @@ export const AdminAnalyticsScreen: React.FC = () => {
       {/* Page Header */}
       <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 border-b border-border-parchment dark:border-zinc-800 pb-6 transition-colors">
         <div>
-          <h1 className="font-h1 text-h1-mobile md:text-h1 text-primary mb-1">System Analytics</h1>
+          <h1 className="font-h1 text-h1-mobile md:text-h1 text-on-background mb-1">System Analytics</h1>
           <p className="font-body-lg text-xs md:text-sm text-on-surface-variant">
             Overview of Campus Shelf metrics, circulation trends, and department usage.
           </p>
@@ -234,7 +247,7 @@ export const AdminAnalyticsScreen: React.FC = () => {
         <div className="p-5 border-b border-border-parchment dark:border-zinc-800 flex justify-between items-center bg-surface-container-low dark:bg-zinc-950">
           <h3 className="font-h3 text-sm md:text-base text-on-background font-bold">Most Borrowed Titles</h3>
           <button 
-            onClick={() => alert('YTD Popularity Logs compiled. Downloading spreadsheet.')}
+            onClick={handleExportCSV}
             className="text-primary hover:text-primary-container font-bold text-xs flex items-center gap-1.5"
           >
             <span>Export CSV</span>

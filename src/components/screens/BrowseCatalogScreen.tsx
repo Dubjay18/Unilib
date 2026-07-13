@@ -13,7 +13,7 @@ import {
 } from '@phosphor-icons/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { reviewsApi } from '@/lib/api'
+import { reviewsApi, categoryApi } from '@/lib/api'
 
 export const BrowseCatalogScreen: React.FC = () => {
   const queryClient = useQueryClient()
@@ -114,19 +114,24 @@ export const BrowseCatalogScreen: React.FC = () => {
     setFavorites(prev => ({ ...prev, [id]: !prev[id] }))
   }
 
+  // Query: Categories from API
+  const { data: apiCategories = [] } = useQuery({
+    queryKey: ['categories'],
+    queryFn: () => categoryApi.getCategories({ view: 'top-level' })
+  })
+
   const categories = [
     { name: 'All Subjects', count: books.length },
-    { name: 'Science & Math', count: books.filter(b => b.category === 'Science & Math').length },
-    { name: 'History & Humanities', count: books.filter(b => b.category === 'History & Humanities' || b.category === 'Philosophy').length },
-    { name: 'Computer Science', count: books.filter(b => b.category === 'Computer Science').length },
-    { name: 'Arts & Design', count: books.filter(b => b.category === 'Arts & Design').length }
+    ...apiCategories.map((cat: { name: string; itemCount: number }) => ({
+      name: cat.name,
+      count: cat.itemCount || books.filter(b => b.category === cat.name).length
+    }))
   ]
 
   // Filter book items
   const filteredBooks = books.filter(book => {
     const matchesCategory = activeCategory === 'All Subjects' || 
-      book.category === activeCategory ||
-      (activeCategory === 'History & Humanities' && book.category === 'Philosophy')
+      book.category === activeCategory
 
     const matchesSearch = book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       book.author.toLowerCase().includes(searchQuery.toLowerCase())

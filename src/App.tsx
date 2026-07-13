@@ -57,9 +57,6 @@ const LoginScreenWrapper: React.FC = () => {
       <main className="flex-grow flex items-center justify-center">
         <LoginScreen />
       </main>
-      <footer className="py-6 border-t border-border-parchment/65 dark:border-zinc-900 text-center text-xs text-on-surface-variant font-medium">
-        Campus Shelf Portal Inc. Built with React 19 + Tailwind v4 + Phosphor.
-      </footer>
     </div>
   )
 }
@@ -68,7 +65,7 @@ const LoginScreenWrapper: React.FC = () => {
 const Footer: React.FC = () => (
   <footer className="py-6 border-t border-border-parchment/60 dark:border-zinc-900 bg-surface-container-low/30 dark:bg-zinc-950/20 text-center text-xs text-on-surface-variant font-medium">
     <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-      <p>© 2026 Campus Shelf Management System | Intellectual Property Office</p>
+      <p>© 2026 CampusShelf Management System | Intellectual Property Office</p>
       <div className="flex gap-4">
         <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
         <a href="#" className="hover:text-primary transition-colors">Terms</a>
@@ -140,6 +137,7 @@ const SystemSettingsView: React.FC = () => {
             <span>Database Backup</span>
           </h3>
           <p className="font-medium text-xs">Configure automated nightly database snapshots for archives.</p>
+          <p className="text-[10px] text-on-surface-variant">Creates an immediate backup of all catalogue records, loan history, and user accounts for disaster recovery purposes.</p>
           <div className="flex gap-3 pt-1">
             <button className="bg-primary hover:bg-primary-container text-on-primary font-bold px-4 py-2 rounded-lg transition-colors shadow-sm flex items-center gap-1">
               <FloppyDisk size={14} />
